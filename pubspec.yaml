@@ -1,0 +1,22 @@
+name: flappy_dash
+description: "Flappy bird but in Flutter"
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.9.2 <4.0.0"
+  flutter: ">=3.35.7"
+
+dependencies:
+  flame: ^1.33.0
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flame_lint: ^1.4.2
+  leancode_lint: ^19.0.0
+
+flutter:
+  assets:
+    - assets/images/
