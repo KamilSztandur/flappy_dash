@@ -9,9 +9,10 @@ environment:
   flutter: ">=3.35.7"
 
 dependencies:
-  flame: ^1.33.0
   flutter:
     sdk: flutter
+  flame: ^1.33.0
+  collection: ^1.19.1
 
 dev_dependencies:
   flame_lint: ^1.4.2
