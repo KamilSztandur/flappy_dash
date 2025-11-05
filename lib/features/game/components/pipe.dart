@@ -62,7 +62,7 @@ class Pipe extends SpriteComponent
   }
 
   void _updateScreenPosition() {
-    final localOffset = globalOffset + game.horizontalOffset;
+    final localOffset = globalOffset - game.progress.horizontalOffset;
     final gameRadius = game.size.y / 2;
 
     position = switch (alignment) {

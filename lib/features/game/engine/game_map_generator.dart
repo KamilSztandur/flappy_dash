@@ -52,6 +52,11 @@ class GameMapGenerator {
       ]);
     }
 
-    return GameMap(pipes: pipes);
+    return GameMap(
+      pipes: pipes,
+      scoreMilestones: {
+        for (final pipe in pipes) pipe.globalOffset,
+      },
+    );
   }
 }
