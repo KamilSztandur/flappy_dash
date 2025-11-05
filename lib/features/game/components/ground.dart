@@ -16,7 +16,7 @@ class Ground extends ParallaxComponent<FlappyDashGame> {
 
   @override
   Future<void> update(double dt) async {
-    final isGameOngoing = game.progress.stage == GameStage.game && !game.paused;
+    final isGameOngoing = game.progress.stage != GameStage.gameOver;
     final isParalaxToggled = parallax?.baseVelocity.x != 0;
 
     if (isGameOngoing && !isParalaxToggled) {

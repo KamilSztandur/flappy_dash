@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flappy_dash/features/game/models/game_progress.dart';
+import 'package:flappy_dash/features/game/models/game_stage.dart';
 import 'package:flappy_dash/features/game/world.dart';
 import 'package:flutter/widgets.dart';
 
@@ -28,7 +29,10 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
     await FlameAudio.bgm.stop();
     unawaited(FlameAudio.bgm.play('game_music.mp3'));
 
-    world = FlappyDashWorld();
+    if (progress.stage == GameStage.gameOver) {
+      world = FlappyDashWorld();
+    }
+
     progress.start();
 
     if (paused) {

@@ -24,16 +24,17 @@ class FlappyDashWorld extends World
     add(Background());
 
     add(Ground());
-
-    gameMap.pipes.forEach(add);
   }
 
   @override
   Future<void> update(double dt) async {
     if (game.progress.stage == GameStage.game &&
         game.findByKey(Player.playerKey) == null) {
+      gameMap.pipes.forEach(add);
       add(player);
       add(scoreDisplay);
+
+      player.jump();
     }
 
     if (game.progress.stage == GameStage.gameOver &&

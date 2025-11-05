@@ -51,6 +51,13 @@ class _MainMenuOverlayState extends State<MainMenuOverlay>
   }
 
   @override
+  void dispose() {
+    _bounceController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final s = l10n(context);
 

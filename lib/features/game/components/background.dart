@@ -10,7 +10,7 @@ class Background extends ParallaxComponent<FlappyDashGame> {
 
   @override
   Future<void> onLoad() async {
-    final isGameOngoing = game.progress.stage == GameStage.game && !game.paused;
+    final isGameOngoing = game.progress.stage != GameStage.gameOver;
 
     final sky = ParallaxLayer(
       ParallaxImage(
