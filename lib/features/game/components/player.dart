@@ -1,17 +1,19 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flappy_dash/features/game/game.dart';
 
-class Player extends SpriteComponent with HasGameReference<FlappyDashGame> {
+class Player extends SpriteComponent
+    with HasGameReference<FlappyDashGame>, CollisionCallbacks {
   Player()
     : super(
         key: playerKey,
-        size: Vector2.all(100),
+        size: Vector2.all(75),
         anchor: Anchor.center,
       );
 
   static final playerKey = ComponentKey.unique();
   static const gravitalVelocity = 100.0;
-  static const jumpVelocity = -500.0;
+  static const jumpVelocity = -300.0;
 
   final Vector2 velocity = Vector2(0, jumpVelocity);
 
@@ -20,6 +22,8 @@ class Player extends SpriteComponent with HasGameReference<FlappyDashGame> {
   @override
   Future<void> onLoad() async {
     sprite = await Sprite.load('player.jpg');
+
+    add(CircleHitbox());
   }
 
   @override

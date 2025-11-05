@@ -6,6 +6,7 @@ import 'package:flappy_dash/features/game/components/background.dart';
 import 'package:flappy_dash/features/game/components/ground.dart';
 import 'package:flappy_dash/features/game/components/pipe.dart';
 import 'package:flappy_dash/features/game/components/player.dart';
+import 'package:flappy_dash/features/game/engine/game_map_generator.dart';
 import 'package:flappy_dash/features/game/game.dart';
 
 class FlappyDashWorld extends World
@@ -20,35 +21,8 @@ class FlappyDashWorld extends World
 
     add(Ground());
 
-    const totalPipes = 10;
-    for (var i = 0; i < totalPipes; i++) {
-      final offset = 300.0 + i * 400.0;
-      final holeSize = (totalPipes - i) * 30.0;
-
-      final holePositionFactor = Random().nextDouble();
-
-      final remainingHeight = game.size.y - holeSize;
-
-      final bottomPipeOffset = remainingHeight * holePositionFactor;
-      final topPipeOffset = remainingHeight * (1 - holePositionFactor);
-
-      add(
-        Pipe(
-          horizontalOffset: offset,
-          alignment: PipeAlignment.top,
-
-          verticalOffset: topPipeOffset,
-        ),
-      );
-
-      add(
-        Pipe(
-          horizontalOffset: offset,
-          alignment: PipeAlignment.bottom,
-          verticalOffset: bottomPipeOffset,
-        ),
-      );
-    }
+    final gameMap = GameMapGenerator(gameSize: game.size).create();
+    gameMap.pipes.forEach(add);
   }
 
   @override

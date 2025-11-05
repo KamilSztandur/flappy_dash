@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 
 typedef GameOverCallback = void Function(GameScore score);
 
-class FlappyDashGame extends FlameGame {
+class FlappyDashGame extends FlameGame with HasCollisionDetection {
   FlappyDashGame({
     required this.onGameOver,
     required this.onGameStarted,
