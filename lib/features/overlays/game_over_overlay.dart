@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
+import 'package:flappy_dash/resources/strings.dart';
 import 'package:flutter/material.dart';
 
 class GameOverOverlay extends StatelessWidget {
@@ -18,6 +19,8 @@ class GameOverOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n(context);
+
     final screenSize = MediaQuery.sizeOf(context);
 
     final itemsConstraints = BoxConstraints(
@@ -34,7 +37,7 @@ class GameOverOverlay extends StatelessWidget {
           ConstrainedBox(
             constraints: itemsConstraints,
             child: Text(
-              'GAME OVER ${score.username}!',
+              s.game_over_title(score.username),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                 color: Colors.yellow,
@@ -45,7 +48,7 @@ class GameOverOverlay extends StatelessWidget {
           ConstrainedBox(
             constraints: itemsConstraints,
             child: Text(
-              'Your score was ${score.value}',
+              s.game_over_message(score.value),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 color: Colors.yellow,

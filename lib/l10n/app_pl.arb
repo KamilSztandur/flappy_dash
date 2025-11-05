@@ -1,0 +1,18 @@
+{
+    "@@locale": "pl",
+    "game_over_message": "{count, plural, =1 {Twój wynik to {count} punkt} few {Twój wynik to {count} punkty} many {Twój wynik to {count} punktów} other {Twój wynik to {count} punktów}}",
+    "@game_over_message": {
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "game_over_title": "TO KONIEC {username}!",
+    "@game_over_title": {
+        "placeholders": {
+            "username": {
+                "type": "String"
+            }
+        }
+    },
+    "main_menu_press_anywhere_to_start": "KLIKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA"
+}

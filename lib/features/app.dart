@@ -4,6 +4,7 @@ import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/models/game_stage.dart';
 import 'package:flappy_dash/features/overlays/game_over_overlay.dart';
 import 'package:flappy_dash/features/overlays/main_menu_overlay.dart';
+import 'package:flappy_dash/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class FlappyDashApp extends StatefulWidget {
@@ -35,6 +36,8 @@ class _FlappyDashAppState extends State<FlappyDashApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         body: Stack(
           children: [

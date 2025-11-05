@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flappy_dash/design_system/spacings.dart';
+import 'package:flappy_dash/resources/strings.dart';
 import 'package:flutter/material.dart';
 
 class MainMenuOverlay extends StatelessWidget {
@@ -15,6 +16,8 @@ class MainMenuOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = l10n(context);
+
     final screenSize = MediaQuery.sizeOf(context);
 
     return GestureDetector(
@@ -26,7 +29,7 @@ class MainMenuOverlay extends StatelessWidget {
             maxWidth: min(screenSize.width - _padding.horizontal, 300),
           ),
           child: Text(
-            'PRESS ANYWHERE TO START',
+            s.main_menu_press_anywhere_to_start,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineLarge?.copyWith(
               color: Colors.yellow,

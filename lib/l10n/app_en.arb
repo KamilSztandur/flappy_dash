@@ -1,0 +1,6 @@
+{
+    "@@locale": "en",
+    "game_over_message": "{count, plural, =1 {Your score was {count} point} other {Your score was {count} points}}",
+    "game_over_title": "GAME OVER {username}!",
+    "main_menu_press_anywhere_to_start": "PRESS ANYWHERE TO RELEASE THE BIRD"
+}
