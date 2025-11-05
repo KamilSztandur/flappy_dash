@@ -1,13 +1,9 @@
 import 'package:flame/game.dart';
 import 'package:flappy_dash/common/shared_preferences.dart';
-import 'package:flappy_dash/design_system/language/switch_language_button.dart';
-import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flappy_dash/features/game/game.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/models/game_stage.dart';
 import 'package:flappy_dash/features/home/widgets/home_controls.dart';
-import 'package:flappy_dash/features/home/widgets/leaderboard_button.dart';
-import 'package:flappy_dash/features/leaderboard/leaderboard_page.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
 import 'package:flappy_dash/features/overlays/game_over_overlay.dart';
 import 'package:flappy_dash/features/overlays/main_menu_overlay.dart';
