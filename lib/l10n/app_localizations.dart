@@ -104,6 +104,138 @@ abstract class AppLocalizations {
   /// **'Przełącz na polski'**
   String get common_switch_language;
 
+  /// No description provided for @game_flutter_tips_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Ignore all errors – they only slow down your build.'**
+  String get game_flutter_tips_1;
+
+  /// No description provided for @game_flutter_tips_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Don’t test anything. If it works in your emulator, it works everywhere.'**
+  String get game_flutter_tips_2;
+
+  /// No description provided for @game_flutter_tips_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Używaj setState() absolutnie wszędzie, nawet w async callach.'**
+  String get game_flutter_tips_3;
+
+  /// No description provided for @game_flutter_tips_4.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep all colors, fonts, and paddings directly in your widgets.'**
+  String get game_flutter_tips_4;
+
+  /// No description provided for @game_flutter_tips_5.
+  ///
+  /// In en, this message translates to:
+  /// **'Don’t split your code – one huge file shows true seniority.'**
+  String get game_flutter_tips_5;
+
+  /// No description provided for @game_flutter_tips_6.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment every single line, it makes you look like a hardworking person.'**
+  String get game_flutter_tips_6;
+
+  /// No description provided for @game_flutter_tips_7.
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid using const, it looks too serious D:'**
+  String get game_flutter_tips_7;
+
+  /// No description provided for @game_flutter_tips_8.
+  ///
+  /// In en, this message translates to:
+  /// **'Never update packages – it worked fine back in 2021.'**
+  String get game_flutter_tips_8;
+
+  /// No description provided for @game_flutter_tips_9.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip null safety, back then everything worked fine without it'**
+  String get game_flutter_tips_9;
+
+  /// No description provided for @game_flutter_tips_10.
+  ///
+  /// In en, this message translates to:
+  /// **'Always start a new project by copying an old one.'**
+  String get game_flutter_tips_10;
+
+  /// No description provided for @game_flutter_tips_11.
+  ///
+  /// In en, this message translates to:
+  /// **'Use var everywhere – types are for the weak.'**
+  String get game_flutter_tips_11;
+
+  /// No description provided for @game_flutter_tips_12.
+  ///
+  /// In en, this message translates to:
+  /// **'Never address code reviews – they’re just a waste of time.'**
+  String get game_flutter_tips_12;
+
+  /// No description provided for @game_flutter_tips_13.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a SingleChildScrollView with Column with a thousand children – sooo convenient!\n'**
+  String get game_flutter_tips_13;
+
+  /// No description provided for @game_flutter_tips_14.
+  ///
+  /// In en, this message translates to:
+  /// **'Always hardcode your data directly in the widget, forget about providers.'**
+  String get game_flutter_tips_14;
+
+  /// No description provided for @game_flutter_tips_15.
+  ///
+  /// In en, this message translates to:
+  /// **'Never refactor – it kills the mood!'**
+  String get game_flutter_tips_15;
+
+  /// No description provided for @game_flutter_tips_16.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t let debug console intimidate you, hide it'**
+  String get game_flutter_tips_16;
+
+  /// No description provided for @game_flutter_tips_17.
+  ///
+  /// In en, this message translates to:
+  /// **'Always use print() instead of the debugger.'**
+  String get game_flutter_tips_17;
+
+  /// No description provided for @game_flutter_tips_18.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep logic and UI in one place, no need to overcomplicate.'**
+  String get game_flutter_tips_18;
+
+  /// No description provided for @game_flutter_tips_19.
+  ///
+  /// In en, this message translates to:
+  /// **'Always use StatefulWidget, maybe some day you\'ll need its state'**
+  String get game_flutter_tips_19;
+
+  /// No description provided for @game_flutter_tips_20.
+  ///
+  /// In en, this message translates to:
+  /// **'I have nothing left to teach you — you’re the perfect senior'**
+  String get game_flutter_tips_20;
+
+  /// No description provided for @game_flutter_tips_progress_more.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress more to see more!'**
+  String get game_flutter_tips_progress_more;
+
+  /// No description provided for @game_flutter_tips_tip_out_of.
+  ///
+  /// In en, this message translates to:
+  /// **'Flutter Tip #{count} (out of {total})'**
+  String game_flutter_tips_tip_out_of(int count, int total);
+
   /// No description provided for @game_over_message.
   ///
   /// In en, this message translates to:
@@ -161,7 +293,7 @@ abstract class AppLocalizations {
   /// No description provided for @main_menu_press_anywhere_to_start.
   ///
   /// In en, this message translates to:
-  /// **'PRESS ANYWHERE TO RELEASE THE BIRD'**
+  /// **'TAP ANYWHERE TO RELEASE THE BIRD'**
   String get main_menu_press_anywhere_to_start;
 
   /// No description provided for @settings_scoreboard.

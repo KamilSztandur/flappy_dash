@@ -1,8 +1,10 @@
 import 'package:flame/game.dart';
 import 'package:flappy_dash/common/shared_preferences.dart';
+import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flappy_dash/features/game/game.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/models/game_stage.dart';
+import 'package:flappy_dash/features/home/widgets/flutter_tip_banner.dart';
 import 'package:flappy_dash/features/home/widgets/home_controls.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
 import 'package:flappy_dash/features/overlays/game_over_overlay.dart';
@@ -51,6 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
+    final isVertical = screenSize.width < screenSize.height;
+
     return Scaffold(
       floatingActionButton: _hideUI
           ? null
@@ -64,17 +69,23 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           GameWidget(game: _game),
-          if (!_hideUI)
-            switch (_game.progress.stage) {
-              GameStage.gameOver => GameOverOverlay(
-                score: _lastScore!,
-                onRestartTap: _game.start,
-              ),
-              GameStage.mainMenu => MainMenuOverlay(
-                onStartTap: _game.start,
-              ),
-              GameStage.game => const SizedBox.shrink(),
-            },
+          switch (_game.progress.stage) {
+            GameStage.gameOver when !_hideUI => GameOverOverlay(
+              score: _lastScore!,
+              onRestartTap: _game.start,
+            ),
+            GameStage.mainMenu when !_hideUI => MainMenuOverlay(
+              onStartTap: _game.start,
+            ),
+            GameStage.game => PositionedDirectional(
+              top: isVertical ? null : AppSpacings.s32.value,
+              bottom: isVertical ? AppSpacings.s32.value : null,
+              start: isVertical ? AppSpacings.s32.value : null,
+              end: AppSpacings.s32.value,
+              child: const FlutterTipBanner(),
+            ),
+            _ => const SizedBox.shrink(),
+          },
         ],
       ),
     );
