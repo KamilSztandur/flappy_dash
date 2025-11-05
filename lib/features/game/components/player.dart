@@ -1,6 +1,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/models/game_stage.dart';
 
 class Player extends SpriteComponent
     with HasGameReference<FlappyDashGame>, CollisionCallbacks {
@@ -28,7 +29,7 @@ class Player extends SpriteComponent
 
   @override
   Future<void> update(double dt) async {
-    if (game.isGameOver) {
+    if (game.progress.stage == GameStage.gameOver) {
       return;
     }
 
@@ -36,7 +37,9 @@ class Player extends SpriteComponent
     if (gameStarted) {
       // If fell below the screen, then game over.
       if (position.y > game.size.y / 2 + size.y / 2) {
-        game.gameOver();
+        await game.gameOver();
+
+        return;
       }
 
       final millisecondsSinceLastJump = lastJumpTime

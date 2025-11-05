@@ -1,4 +1,5 @@
 import 'package:flame/game.dart';
+import 'package:flappy_dash/features/game/models/game_progress.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/world.dart';
 import 'package:flutter/widgets.dart';
@@ -13,42 +14,32 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
 
   final GameOverCallback onGameOver;
   final VoidCallback onGameStarted;
-  final double horizontalSpeed = 0.3; // pixels per millisecond
 
-  DateTime? _startTime;
-  bool _isGameOver = false;
-
-  bool get started => _startTime != null;
-  bool get isGameOver => _isGameOver;
-
-  double get horizontalOffset => switch (_startTime) {
-    final startTime? =>
-      startTime.difference(DateTime.now()).inMilliseconds * horizontalSpeed,
-    null => 0,
-  };
+  final progress = GameProgress();
 
   void start() {
-    _startTime = DateTime.now();
-    _isGameOver = false;
-
-    resumeEngine();
-
     world = FlappyDashWorld();
+    progress.start();
+
+    if (paused) {
+      resumeEngine();
+    }
 
     onGameStarted();
   }
 
-  void gameOver() {
-    _startTime = null;
-    _isGameOver = true;
+  Future<void> gameOver() async {
+    progress.gameOver();
+
+    // Let's wait for engine to clean up after game before pausing it
+    await Future<void>.delayed(const Duration(milliseconds: 100));
 
     pauseEngine();
 
     onGameOver(
-      // TODO: Use real score
-      const GameScore(
-        value: 123,
+      GameScore(
         username: 'Nelik',
+        value: progress.score,
       ),
     );
   }

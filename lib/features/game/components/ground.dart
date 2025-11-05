@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/parallax.dart';
 import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/models/game_stage.dart';
 import 'package:flutter/painting.dart';
 
 class Ground extends ParallaxComponent<FlappyDashGame> {
@@ -15,7 +16,7 @@ class Ground extends ParallaxComponent<FlappyDashGame> {
 
   @override
   Future<void> update(double dt) async {
-    final isGameOngoing = !game.isGameOver && game.started && !game.paused;
+    final isGameOngoing = game.progress.stage == GameStage.game && !game.paused;
     final isParalaxToggled = parallax?.baseVelocity.x != 0;
 
     if (isGameOngoing && !isParalaxToggled) {

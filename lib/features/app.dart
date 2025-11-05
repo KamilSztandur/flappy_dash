@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/game.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
+import 'package:flappy_dash/features/game/models/game_stage.dart';
 import 'package:flappy_dash/features/overlays/game_over_overlay.dart';
 import 'package:flappy_dash/features/overlays/main_menu_overlay.dart';
 import 'package:flutter/material.dart';
@@ -38,15 +39,16 @@ class _FlappyDashAppState extends State<FlappyDashApp> {
         body: Stack(
           children: [
             GameWidget(game: _game),
-            if (_score case final score?)
-              GameOverOverlay(
-                score: score,
+            switch (_game.progress.stage) {
+              GameStage.gameOver => GameOverOverlay(
+                score: _score!,
                 onRestartTap: _game.start,
-              )
-            else if (!_game.started)
-              MainMenuOverlay(
+              ),
+              GameStage.mainMenu => MainMenuOverlay(
                 onStartTap: _game.start,
               ),
+              GameStage.game => const SizedBox.shrink(),
+            },
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/parallax.dart';
 import 'package:flame/rendering.dart';
 import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/models/game_stage.dart';
 import 'package:flutter/material.dart';
 
 class Background extends ParallaxComponent<FlappyDashGame> {
@@ -9,7 +10,7 @@ class Background extends ParallaxComponent<FlappyDashGame> {
 
   @override
   Future<void> onLoad() async {
-    final isGameOngoing = !game.isGameOver && game.started && !game.paused;
+    final isGameOngoing = game.progress.stage == GameStage.game && !game.paused;
 
     final sky = ParallaxLayer(
       ParallaxImage(
