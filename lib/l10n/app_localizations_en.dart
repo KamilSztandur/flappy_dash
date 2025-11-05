@@ -9,6 +9,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get common_switch_language => 'Przełącz na polski';
+
+  @override
   String game_over_message(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -27,4 +30,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get main_menu_press_anywhere_to_start =>
       'PRESS ANYWHERE TO RELEASE THE BIRD';
+
+  @override
+  String get settings_scoreboard => 'Scoreboard';
+
+  @override
+  String get settings_settings => 'Settings';
 }

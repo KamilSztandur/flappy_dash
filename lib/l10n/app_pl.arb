@@ -1,5 +1,6 @@
 {
     "@@locale": "pl",
+    "common_switch_language": "Switch to English",
     "game_over_message": "{count, plural, =1 {Twój wynik to {count} punkt} few {Twój wynik to {count} punkty} many {Twój wynik to {count} punktów} other {Twój wynik to {count} punktów}}",
     "@game_over_message": {
         "placeholders": {
@@ -14,5 +15,7 @@
             }
         }
     },
-    "main_menu_press_anywhere_to_start": "KLIKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA"
+    "main_menu_press_anywhere_to_start": "KLIKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA",
+    "settings_scoreboard": "Tablica wyników",
+    "settings_settings": "Ustawienia"
 }

@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('pl'),
   ];
 
+  /// No description provided for @common_switch_language.
+  ///
+  /// In pl, this message translates to:
+  /// **'Switch to English'**
+  String get common_switch_language;
+
   /// No description provided for @game_over_message.
   ///
   /// In pl, this message translates to:
@@ -115,6 +121,18 @@ abstract class AppLocalizations {
   /// In pl, this message translates to:
   /// **'KLIKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA'**
   String get main_menu_press_anywhere_to_start;
+
+  /// No description provided for @settings_scoreboard.
+  ///
+  /// In pl, this message translates to:
+  /// **'Tablica wyników'**
+  String get settings_scoreboard;
+
+  /// No description provided for @settings_settings.
+  ///
+  /// In pl, this message translates to:
+  /// **'Ustawienia'**
+  String get settings_settings;
 }
 
 class _AppLocalizationsDelegate

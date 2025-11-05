@@ -37,10 +37,11 @@ class GameOverOverlay extends StatelessWidget {
           ConstrainedBox(
             constraints: itemsConstraints,
             child: Text(
-              s.game_over_title(score.username),
+              s.game_over_title(score.username).toUpperCase(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                 color: Colors.yellow,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),

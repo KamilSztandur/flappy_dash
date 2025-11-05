@@ -9,6 +9,9 @@ class AppLocalizationsPl extends AppLocalizations {
   AppLocalizationsPl([String locale = 'pl']) : super(locale);
 
   @override
+  String get common_switch_language => 'Switch to English';
+
+  @override
   String game_over_message(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -29,4 +32,10 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get main_menu_press_anywhere_to_start =>
       'KLIKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA';
+
+  @override
+  String get settings_scoreboard => 'Tablica wyników';
+
+  @override
+  String get settings_settings => 'Ustawienia';
 }
