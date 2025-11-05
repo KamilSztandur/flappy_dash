@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flappy_dash/features/game/models/game_progress.dart';
 import 'package:flappy_dash/features/game/world.dart';
 import 'package:flutter/widgets.dart';
@@ -16,7 +19,15 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
 
   final progress = GameProgress();
 
-  void start() {
+  Future<void> init() async {
+    await FlameAudio.bgm.audioPlayer.setVolume(0.1);
+    await FlameAudio.bgm.play('menu_music.mp3');
+  }
+
+  Future<void> start() async {
+    await FlameAudio.bgm.stop();
+    unawaited(FlameAudio.bgm.play('game_music.mp3'));
+
     world = FlappyDashWorld();
     progress.start();
 
@@ -28,6 +39,10 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
   }
 
   Future<void> gameOver() async {
+    await FlameAudio.bgm.stop();
+    unawaited(FlameAudio.bgm.play('menu_music.mp3'));
+    unawaited(FlameAudio.play('game_over.mp3'));
+
     progress.gameOver();
 
     // Let's wait for engine to clean up after game before pausing it

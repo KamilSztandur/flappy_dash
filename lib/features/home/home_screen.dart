@@ -49,6 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
         _lastScore = null;
       }),
     );
+
+    _game.init();
   }
 
   @override
