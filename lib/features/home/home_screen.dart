@@ -1,9 +1,12 @@
 import 'package:flame/game.dart';
+import 'package:flappy_dash/common/shared_preferences.dart';
 import 'package:flappy_dash/design_system/language/switch_language_button.dart';
 import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flappy_dash/features/game/game.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/models/game_stage.dart';
+import 'package:flappy_dash/features/home/widgets/home_controls.dart';
+import 'package:flappy_dash/features/home/widgets/leaderboard_button.dart';
 import 'package:flappy_dash/features/leaderboard/leaderboard_page.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
 import 'package:flappy_dash/features/overlays/game_over_overlay.dart';
@@ -29,12 +32,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _game = FlappyDashGame(
       onGameOver: (score) {
-        context.read<LeaderboardRepository>().writeScore(score);
+        final username = context.read<AppSharedPreferences>().username;
+
+        final gameScore = GameScore(
+          username: username,
+          value: score,
+        );
+
+        context.read<LeaderboardRepository>().writeScore(gameScore);
 
         setState(() {
           _hideUI = false;
-
-          _lastScore = score;
+          _lastScore = gameScore;
         });
       },
       onGameStarted: () => setState(() {
@@ -49,20 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: _hideUI
           ? null
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: AppSpacings.s16.value,
-              children: [
-                const SwitchLanguageButton(),
-                FloatingActionButton(
-                  heroTag: #leaderboard_button,
-                  onPressed: () =>
-                      Navigator.of(context).push(LeaderboardRoute()),
-                  backgroundColor: Colors.white30,
-                  foregroundColor: Colors.white,
-                  child: const Icon(Icons.leaderboard),
-                ),
-              ],
+          : HomeControls(
+              toggleUI: (showUI) {
+                setState(() {
+                  _hideUI = !showUI;
+                });
+              },
             ),
       body: Stack(
         children: [

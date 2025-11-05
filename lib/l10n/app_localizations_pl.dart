@@ -30,6 +30,18 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
+  String get home_cancel => 'Anuluj';
+
+  @override
+  String get home_enter_username => 'Wpisz Twoją nazwę';
+
+  @override
+  String get home_save => 'Zapisz';
+
+  @override
+  String get home_username => 'Twoja nazwa';
+
+  @override
   String get leaderboard_empty_subtitle => 'Zagraj, aby to zmienić';
 
   @override

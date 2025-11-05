@@ -15,6 +15,10 @@
             }
         }
     },
+    "home_cancel": "Cancel",
+    "home_enter_username": "Enter username",
+    "home_save": "Save",
+    "home_username": "Username",
     "leaderboard_empty_subtitle": "Play a game to get started",
     "leaderboard_empty_title": "No scores yet!",
     "leaderboard_title": "Leaderboard",

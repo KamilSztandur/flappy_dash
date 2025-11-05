@@ -116,6 +116,30 @@ abstract class AppLocalizations {
   /// **'GAME OVER {username}!'**
   String game_over_title(String username);
 
+  /// No description provided for @home_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get home_cancel;
+
+  /// No description provided for @home_enter_username.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter username'**
+  String get home_enter_username;
+
+  /// No description provided for @home_save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get home_save;
+
+  /// No description provided for @home_username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get home_username;
+
   /// No description provided for @leaderboard_empty_subtitle.
   ///
   /// In en, this message translates to:

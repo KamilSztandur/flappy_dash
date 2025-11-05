@@ -28,6 +28,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get home_cancel => 'Cancel';
+
+  @override
+  String get home_enter_username => 'Enter username';
+
+  @override
+  String get home_save => 'Save';
+
+  @override
+  String get home_username => 'Username';
+
+  @override
   String get leaderboard_empty_subtitle => 'Play a game to get started';
 
   @override

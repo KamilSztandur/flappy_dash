@@ -1,10 +1,9 @@
 import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/models/game_progress.dart';
-import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/world.dart';
 import 'package:flutter/widgets.dart';
 
-typedef GameOverCallback = void Function(GameScore score);
+typedef GameOverCallback = void Function(int score);
 
 class FlappyDashGame extends FlameGame with HasCollisionDetection {
   FlappyDashGame({
@@ -36,11 +35,6 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
 
     pauseEngine();
 
-    onGameOver(
-      GameScore(
-        username: 'Nelik',
-        value: progress.score,
-      ),
-    );
+    onGameOver(progress.score);
   }
 }
