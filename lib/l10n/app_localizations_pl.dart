@@ -30,6 +30,15 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
+  String get leaderboard_empty_subtitle => 'Zagraj, aby to zmienić';
+
+  @override
+  String get leaderboard_empty_title => 'Pusto tutaj!';
+
+  @override
+  String get leaderboard_title => 'Tablica wyników';
+
+  @override
   String get main_menu_press_anywhere_to_start =>
       'KLIKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA';
 

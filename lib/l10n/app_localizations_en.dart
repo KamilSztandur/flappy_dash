@@ -28,6 +28,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get leaderboard_empty_subtitle => 'Play a game to get started';
+
+  @override
+  String get leaderboard_empty_title => 'No scores yet!';
+
+  @override
+  String get leaderboard_title => 'Leaderboard';
+
+  @override
   String get main_menu_press_anywhere_to_start =>
       'PRESS ANYWHERE TO RELEASE THE BIRD';
 

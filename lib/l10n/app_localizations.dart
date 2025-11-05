@@ -100,38 +100,56 @@ abstract class AppLocalizations {
 
   /// No description provided for @common_switch_language.
   ///
-  /// In pl, this message translates to:
-  /// **'Switch to English'**
+  /// In en, this message translates to:
+  /// **'Przełącz na polski'**
   String get common_switch_language;
 
   /// No description provided for @game_over_message.
   ///
-  /// In pl, this message translates to:
-  /// **'{count, plural, =1 {Twój wynik to {count} punkt} few {Twój wynik to {count} punkty} many {Twój wynik to {count} punktów} other {Twój wynik to {count} punktów}}'**
+  /// In en, this message translates to:
+  /// **'{count, plural, =1 {Your score was {count} point} other {Your score was {count} points}}'**
   String game_over_message(num count);
 
   /// No description provided for @game_over_title.
   ///
-  /// In pl, this message translates to:
-  /// **'TO KONIEC {username}!'**
+  /// In en, this message translates to:
+  /// **'GAME OVER {username}!'**
   String game_over_title(String username);
+
+  /// No description provided for @leaderboard_empty_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Play a game to get started'**
+  String get leaderboard_empty_subtitle;
+
+  /// No description provided for @leaderboard_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No scores yet!'**
+  String get leaderboard_empty_title;
+
+  /// No description provided for @leaderboard_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get leaderboard_title;
 
   /// No description provided for @main_menu_press_anywhere_to_start.
   ///
-  /// In pl, this message translates to:
-  /// **'KLIKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA'**
+  /// In en, this message translates to:
+  /// **'PRESS ANYWHERE TO RELEASE THE BIRD'**
   String get main_menu_press_anywhere_to_start;
 
   /// No description provided for @settings_scoreboard.
   ///
-  /// In pl, this message translates to:
-  /// **'Tablica wyników'**
+  /// In en, this message translates to:
+  /// **'Scoreboard'**
   String get settings_scoreboard;
 
   /// No description provided for @settings_settings.
   ///
-  /// In pl, this message translates to:
-  /// **'Ustawienia'**
+  /// In en, this message translates to:
+  /// **'Settings'**
   String get settings_settings;
 }
 

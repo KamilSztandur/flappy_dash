@@ -2,7 +2,22 @@
     "@@locale": "en",
     "common_switch_language": "Przełącz na polski",
     "game_over_message": "{count, plural, =1 {Your score was {count} point} other {Your score was {count} points}}",
+    "@game_over_message": {
+        "placeholders": {
+            "count": {}
+        }
+    },
     "game_over_title": "GAME OVER {username}!",
+    "@game_over_title": {
+        "placeholders": {
+            "username": {
+                "type": "String"
+            }
+        }
+    },
+    "leaderboard_empty_subtitle": "Play a game to get started",
+    "leaderboard_empty_title": "No scores yet!",
+    "leaderboard_title": "Leaderboard",
     "main_menu_press_anywhere_to_start": "PRESS ANYWHERE TO RELEASE THE BIRD",
     "settings_scoreboard": "Scoreboard",
     "settings_settings": "Settings"

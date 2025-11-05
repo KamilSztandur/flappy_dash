@@ -1,7 +1,6 @@
 arb-dir: lib/l10n
-template-arb-file: app_pl.arb
+template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
-synthetic-package: false
 nullable-getter: false
 poeditor-project-id: 809786
 preferred-supported-locales: [ en ]
