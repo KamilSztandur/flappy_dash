@@ -3,24 +3,32 @@ import 'package:flame/events.dart';
 import 'package:flappy_dash/features/game/components/background.dart';
 import 'package:flappy_dash/features/game/components/ground.dart';
 import 'package:flappy_dash/features/game/components/player.dart';
+import 'package:flappy_dash/features/game/engine/game_map_generator.dart';
+import 'package:flappy_dash/features/game/game.dart';
 
-class MyWorld extends World with TapCallbacks {
-  MyWorld({required this.width, required this.height});
-
-  final double width;
-  final double height;
+class FlappyDashWorld extends World
+    with TapCallbacks, HasGameReference<FlappyDashGame> {
+  FlappyDashWorld();
 
   final player = Player();
 
   @override
   Future<void> onLoad() async {
-    final topStart = Vector2(-width / 2, -height / 2);
-
-    add(Background(position: topStart, size: Vector2(width, height)));
+    add(Background());
 
     add(Ground());
 
-    add(player);
+    final gameMap = GameMapGenerator(gameSize: game.size).create();
+    gameMap.pipes.forEach(add);
+  }
+
+  @override
+  Future<void> update(double dt) async {
+    if (game.started && game.findByKey(Player.playerKey) == null) {
+      add(player);
+    }
+
+    super.update(dt);
   }
 
   @override
