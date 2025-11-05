@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flutter/material.dart';
 
 class MainMenuOverlay extends StatelessWidget {
@@ -10,7 +11,7 @@ class MainMenuOverlay extends StatelessWidget {
 
   final VoidCallback onStartTap;
 
-  static const _padding = EdgeInsetsDirectional.all(32);
+  static final _padding = AppSpacings.s32.all;
 
   @override
   Widget build(BuildContext context) {

@@ -14,21 +14,25 @@ class GameMapGenerator {
   final Vector2 gameSize;
   final int totalPipes;
 
+  static const _minHoleSize = 150.0;
+
+  static const _decreasementCount = 30;
+
   GameMap create() {
     final pipes = <Pipe>[];
 
     final random = Random();
 
-    final maxHoleSize = gameSize.y * 0.6;
+    final maxHoleSize = gameSize.y * 0.4;
 
     for (var i = 0; i < totalPipes; i++) {
       final offset = 300.0 + i * 400.0;
 
       final decreasementFactor = Curves.easeOut.transform(
-        (totalPipes - i) / totalPipes,
+        max(0, _decreasementCount - i) / _decreasementCount,
       );
 
-      final holeSize = max(200, maxHoleSize * decreasementFactor).toDouble();
+      final holeSize = max(_minHoleSize, maxHoleSize * decreasementFactor);
 
       final holePositionFactor = random.nextDouble();
 

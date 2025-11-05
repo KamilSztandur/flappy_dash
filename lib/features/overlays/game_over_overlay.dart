@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:flappy_dash/features/game/models/score.dart';
+import 'package:flappy_dash/design_system/spacings.dart';
+import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flutter/material.dart';
 
 class GameOverOverlay extends StatelessWidget {
@@ -13,7 +14,7 @@ class GameOverOverlay extends StatelessWidget {
   final GameScore score;
   final VoidCallback onRestartTap;
 
-  static const _padding = EdgeInsetsDirectional.all(32);
+  static final _padding = AppSpacings.s32.all;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class GameOverOverlay extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          AppSpacings.s16.verticalSpace,
           ConstrainedBox(
             constraints: itemsConstraints,
             child: Text(

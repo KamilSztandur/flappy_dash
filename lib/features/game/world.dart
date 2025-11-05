@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flappy_dash/features/game/components/background.dart';
 import 'package:flappy_dash/features/game/components/ground.dart';
-import 'package:flappy_dash/features/game/components/pipe.dart';
 import 'package:flappy_dash/features/game/components/player.dart';
 import 'package:flappy_dash/features/game/engine/game_map_generator.dart';
 import 'package:flappy_dash/features/game/game.dart';

@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/game.dart';
-import 'package:flappy_dash/features/game/models/score.dart';
+import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/overlays/game_over_overlay.dart';
 import 'package:flappy_dash/features/overlays/main_menu_overlay.dart';
 import 'package:flutter/material.dart';

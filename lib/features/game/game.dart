@@ -1,5 +1,5 @@
 import 'package:flame/game.dart';
-import 'package:flappy_dash/features/game/models/score.dart';
+import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/world.dart';
 import 'package:flutter/widgets.dart';
 
@@ -47,7 +47,7 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
     onGameOver(
       // TODO: Use real score
       const GameScore(
-        value: 2137,
+        value: 123,
         username: 'Nelik',
       ),
     );
