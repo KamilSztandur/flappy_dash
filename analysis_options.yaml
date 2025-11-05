@@ -1,5 +1,8 @@
 include: package:leancode_lint/analysis_options.yaml
 
+formatter:
+  trailing_commas: preserve
+
 analyzer:
   plugins:
     - custom_lint
