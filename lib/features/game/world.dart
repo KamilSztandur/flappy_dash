@@ -10,6 +10,8 @@ class MyWorld extends World with TapCallbacks {
   final double width;
   final double height;
 
+  final player = Player();
+
   @override
   Future<void> onLoad() async {
     final topStart = Vector2(-width / 2, -height / 2);
@@ -18,6 +20,13 @@ class MyWorld extends World with TapCallbacks {
 
     add(Ground());
 
-    add(Player(position: Vector2(0, 0)));
+    add(player);
+  }
+
+  @override
+  void onTapDown(TapDownEvent event) {
+    player.jump();
+
+    super.onTapDown(event);
   }
 }

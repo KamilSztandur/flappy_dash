@@ -1,15 +1,12 @@
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
-import 'package:flame/events.dart';
-import 'package:flutter/widgets.dart';
 
-class Player extends SpriteComponent with TapCallbacks, HasGameReference {
-  Player({super.position})
-    : super(size: Vector2.all(200), anchor: Anchor.center);
+class Player extends SpriteComponent with HasGameReference {
+  Player() : super(size: Vector2.all(100), anchor: Anchor.center);
 
   final Vector2 velocity = Vector2.zero();
-  final double terminalVelocity = 300;
-  final List<ComponentKey> jumpKeys = [];
+  final double terminalVelocity = 400;
+  final double jumpVelocity = -350;
+  DateTime lastJumpTime = DateTime.now();
 
   @override
   Future<void> onLoad() async {
@@ -20,43 +17,43 @@ class Player extends SpriteComponent with TapCallbacks, HasGameReference {
   Future<void> update(double dt) async {
     // If fell below the screen, then game over.
     if (position.y > game.size.y / 2 + size.y / 2) {
-      position.y = 0;
+      reset();
     }
 
-    // Apply basic gravity.
-    velocity.y += 30;
+    final millisecondsSinceLastJump = lastJumpTime
+        .difference(DateTime.now())
+        .inMilliseconds
+        .abs();
 
-    // Prevent ember from jumping to crazy fast.
-    velocity.y = velocity.y.clamp(0, terminalVelocity);
+    // Apply basic gravity.
+    final gravityAcceleration = (millisecondsSinceLastJump / 5000).clamp(0, 1);
+    velocity.y += 150 * gravityAcceleration;
 
     // Calculate height based on velocity and current position
     position += velocity * dt;
 
+    final gameRadius = game.size.y / 2;
+    position.y = position.y.clamp(-gameRadius, gameRadius);
+
     // Rotate player upon jumping
-    final rotationDelta = Curves.easeOut.transform(
-      velocity.y / terminalVelocity,
-    );
-
-    final rotationSpeed = jumpKeys.isNotEmpty ? 50 : 300;
-
-    angle += rotationDelta / rotationSpeed;
+    if (millisecondsSinceLastJump > 650) {
+      angle = 0.5;
+    } else {
+      angle = velocity.y < 0 ? -0.5 : 0;
+    }
 
     super.update(dt);
   }
 
-  @override
-  void onTapDown(TapDownEvent event) {
-    final key = ComponentKey.unique();
+  void reset() {
+    position.y = 0;
+    angle = 0;
+    lastJumpTime = DateTime.now();
+    velocity.y = 0;
+  }
 
-    jumpKeys.add(key);
-
-    add(
-      MoveByEffect(
-        key: key,
-        Vector2(0, -200),
-        EffectController(duration: 0.350, curve: Curves.easeOut),
-        onComplete: () => jumpKeys.remove(key),
-      ),
-    );
+  void jump() {
+    lastJumpTime = DateTime.now();
+    velocity.y = jumpVelocity;
   }
 }
