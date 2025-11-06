@@ -86,6 +86,7 @@ class Player extends SpriteComponent
     );
 
     lastJumpTime = DateTime.now();
-    velocity.y = jumpVelocity;
+    velocity.y = velocity.y.clamp(2 * jumpVelocity, 0);
+    velocity.y += jumpVelocity;
   }
 }

@@ -23,10 +23,10 @@ class GameMapGenerator {
 
     final random = Random();
 
-    final maxHoleSize = gameSize.y * 0.4;
+    final maxHoleSize = min(300, gameSize.y * 0.8);
 
     for (var i = 0; i < totalPipes; i++) {
-      final offset = 300.0 + i * 400.0;
+      final offset = 600.0 + i * 600.0;
 
       final decreasementFactor = Curves.easeOut.transform(
         max(0, _decreasementCount - i) / _decreasementCount,
