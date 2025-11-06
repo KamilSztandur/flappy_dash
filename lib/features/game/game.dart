@@ -1,29 +1,38 @@
 import 'dart:async';
 
 import 'package:flame/game.dart';
-import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/models/game_music.dart';
 import 'package:flappy_dash/features/game/world.dart';
 
-class FlappyDashGame extends FlameGame
-    with FlameBlocListenable<GameCubit, GameState> {
-  FlappyDashGame() : super(world: FlappyDashWorld());
+class FlappyDashGame extends FlameGame with HasCollisionDetection {
+  FlappyDashGame({required this.gameCubit});
+
+  final GameCubit gameCubit;
+
+  StreamSubscription<GameState>? _gameStateSubscription;
 
   @override
-  Future<void> onNewState(GameState state) async {
-    super.onNewState(state);
+  Future<void> onLoad() async {
+    await super.onLoad();
 
+    unawaited(GameMusic.menu.play());
+
+    gameCubit.stream.listen(_onGameStateChanged);
+
+    world = GameWorld(gameCubit: gameCubit);
+  }
+
+  Future<void> _onGameStateChanged(GameState state) async {
     switch (state) {
       case MainMenuGameState():
         unawaited(GameMusic.menu.play());
 
-      case PlayingState(:final wasRestarted):
-        unawaited(GameMusic.game.play());
+      case PlayingState():
+        break;
 
-        if (wasRestarted) {
-          world = FlappyDashWorld();
-        }
+      case StartedPlayingState():
+        unawaited(GameMusic.game.play());
 
         if (paused) {
           resumeEngine();
@@ -38,5 +47,12 @@ class FlappyDashGame extends FlameGame
 
         pauseEngine();
     }
+  }
+
+  @override
+  void onRemove() {
+    _gameStateSubscription?.cancel();
+
+    super.onRemove();
   }
 }

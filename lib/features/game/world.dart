@@ -1,70 +1,109 @@
+import 'dart:async';
+
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/components/background.dart';
 import 'package:flappy_dash/features/game/components/ground.dart';
 import 'package:flappy_dash/features/game/components/player.dart';
 import 'package:flappy_dash/features/game/components/score_display.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/providers/game_providers.dart';
 
-class FlappyDashWorld extends World
-    with
-        TapCallbacks,
-        HasGameReference<FlappyDashGame>,
-        FlameBlocListenable<GameCubit, GameState>,
-        FlameBlocReader<GameCubit, GameState> {
-  FlappyDashWorld();
+class GameWorld extends World
+    with TapCallbacks, HasGameReference<FlappyDashGame> {
+  GameWorld({required this.gameCubit});
 
-  final player = Player();
-  final scoreDisplay = ScoreDisplay();
+  final GameCubit gameCubit;
+  StreamSubscription<GameState>? _gameStateSubscription;
+
+  Player? player;
+  ScoreDisplay? scoreDisplay;
+
+  static final _gameElementsKey = ComponentKey.unique();
+  static final _gameBackgroundKey = ComponentKey.unique();
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    add(Background());
-    add(Ground());
-  }
+    _gameStateSubscription = gameCubit.stream.listen(_gameListener);
 
-  @override
-  void onNewState(GameState state) {
-    super.onNewState(state);
-
-    switch (state) {
-      case MainMenuGameState():
-        _maybeRemoveComponent(scoreDisplay, ScoreDisplay.scoreKey);
-        _maybeRemoveComponent(player, Player.playerKey);
-
-      case PlayingState(:final map):
-        map.pipes.forEach(add);
-        add(player);
-        add(scoreDisplay);
-
-        player.jump();
-
-      case GameOverState():
-        _maybeRemoveComponent(scoreDisplay, ScoreDisplay.scoreKey);
-    }
+    add(
+      GameProviders(
+        key: _gameBackgroundKey,
+        gameCubit: gameCubit,
+        components: [
+          Background(),
+          Ground(),
+        ],
+      ),
+    );
   }
 
   @override
   void update(double dt) {
     super.update(dt);
 
-    bloc.updateScore();
+    gameCubit.updateScore();
+  }
+
+  void _gameListener(GameState state) {
+    switch (state) {
+      case MainMenuGameState():
+        _maybeRemoveComponent(_gameElementsKey);
+
+      case PlayingState():
+        break;
+
+      case StartedPlayingState(:final map):
+        _maybeRemoveComponent(_gameElementsKey);
+
+        player = Player();
+        scoreDisplay = ScoreDisplay();
+
+        add(
+          GameProviders(
+            key: _gameElementsKey,
+            gameCubit: gameCubit,
+            components: [
+              ...map.pipes,
+              ?player,
+              ?scoreDisplay,
+            ],
+          ),
+        );
+
+        player?.jump();
+
+      case GameOverState():
+        _maybeRemoveComponent(ScoreDisplay.scoreKey);
+    }
   }
 
   @override
   void onTapDown(TapDownEvent event) {
     super.onTapDown(event);
 
-    player.jump();
+    player?.jump();
   }
 
-  void _maybeRemoveComponent(Component component, ComponentKey key) {
-    if (game.findByKey(key) != null) {
-      remove(component);
+  @override
+  void onRemove() {
+    _gameStateSubscription?.cancel();
+
+    super.onRemove();
+  }
+
+  void _maybeRemoveComponent(ComponentKey key) {
+    try {
+      final component = game.findByKey(key);
+
+      if (component != null) {
+        remove(component);
+      }
+    } catch (_) {
+      // Ignore it
     }
   }
 }

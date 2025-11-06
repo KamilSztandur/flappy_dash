@@ -24,6 +24,8 @@ class _FlutterTipBannerState extends State<FlutterTipBanner>
   late AnimationController _bounceController;
   late Animation<double> _bounceAnimation;
 
+  static const _totalTips = 20;
+
   @override
   void initState() {
     super.initState();
@@ -56,6 +58,11 @@ class _FlutterTipBannerState extends State<FlutterTipBanner>
     ]).animate(_bounceController);
 
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      if (_currentIndex >= _totalTips - 1) {
+        _timer?.cancel();
+        return;
+      }
+
       setState(() {
         _currentIndex++;
       });

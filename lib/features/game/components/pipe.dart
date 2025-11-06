@@ -5,6 +5,7 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/components/player.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/models/game_sounds.dart';
 import 'package:flutter/material.dart';
 
 enum PipeAlignment { top, bottom }
@@ -56,6 +57,8 @@ class Pipe extends SpriteComponent
           Colors.red.withValues(alpha: 0.6),
         ),
       );
+
+      GameSounds.crash.play();
 
       bloc.gameOver();
     }

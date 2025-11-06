@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/models/game_sounds.dart';
 
 class Player extends SpriteComponent
     with
@@ -24,10 +23,7 @@ class Player extends SpriteComponent
   static const gravitalVelocity = 100.0;
   static const jumpVelocity = -300.0;
 
-  final _random = Random();
-  final _jumpSounds = ['jump_1.mp3', 'jump_2.mp3', 'jump_3.mp3'];
-
-  final Vector2 velocity = Vector2(0, jumpVelocity);
+  final velocity = Vector2(0, jumpVelocity);
 
   DateTime lastJumpTime = DateTime.now();
 
@@ -47,8 +43,6 @@ class Player extends SpriteComponent
     if (bloc.state is GameOverState) {
       return;
     }
-
-    // FIXME: check for player position was here
 
     // If fell below the screen, then game over.
     if (position.y > game.size.y / 2 + size.y / 2) {
@@ -84,11 +78,7 @@ class Player extends SpriteComponent
   }
 
   void jump() {
-    unawaited(
-      FlameAudio.play(
-        _jumpSounds[_random.nextInt(_jumpSounds.length)],
-      ),
-    );
+    unawaited(GameSounds.playRandomJump());
 
     lastJumpTime = DateTime.now();
     velocity.y = velocity.y.clamp(2 * jumpVelocity, 0);

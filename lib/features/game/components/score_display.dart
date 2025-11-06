@@ -36,6 +36,17 @@ class ScoreDisplay extends TextComponent
   }
 
   @override
+  void onRemove() {
+    for (final child in children) {
+      if (child is Explosion) {
+        remove(child);
+      }
+    }
+
+    super.onRemove();
+  }
+
+  @override
   void update(double dt) {
     super.update(dt);
 
@@ -45,26 +56,29 @@ class ScoreDisplay extends TextComponent
   Future<void> _updateDisplayedScore() async {
     final currentlyDisplayedScore = int.tryParse(text);
     final currentScore = switch (bloc.state) {
-      PlayingState(:final score) => score,
+      PlayingState(:final score) || StartedPlayingState(:final score) => score,
       _ => null,
     };
 
     if (currentScore != null &&
         currentlyDisplayedScore != null &&
         currentlyDisplayedScore != currentScore) {
-      add(
-        Explosion(
-          position: Vector2(
-            size.x / 2,
-            size.y / 2,
-          ),
+      final explosion = Explosion(
+        position: Vector2(
+          size.x / 2,
+          size.y / 2,
         ),
       );
+
+      add(explosion);
 
       // Let's wait for explosion to start before updating the score
       await Future<void>.delayed(const Duration(milliseconds: 150));
 
       text = ScoreFormatter.format(currentScore);
+
+      // Let's wait for explosion to finish
+      await Future<void>.delayed(const Duration(milliseconds: 1000));
     } else {
       text = currentScore != null ? ScoreFormatter.format(currentScore) : '';
     }

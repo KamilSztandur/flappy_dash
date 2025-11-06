@@ -18,7 +18,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _game = FlappyDashGame();
+  late final FlappyDashGame _game;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _game = FlappyDashGame(
+      gameCubit: context.read<GameCubit>(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       floatingActionButton: hideControls ? null : const HomeControls(),
-      // FIXME: Use Flutter Portal instead
+      // TODO: Use Flutter Portal instead
       body: Stack(
         children: [
           GameWidget(game: _game),
           switch (gameCubit.state) {
             GameOverState() => const GameOverOverlay(),
             MainMenuGameState() => const MainMenuOverlay(),
-            PlayingState() => PositionedDirectional(
+            StartedPlayingState() || PlayingState() => PositionedDirectional(
               top: isVertical ? null : AppSpacings.s32.value,
               bottom: isVertical ? AppSpacings.s32.value : null,
               start: isVertical ? AppSpacings.s32.value : null,

@@ -13,39 +13,47 @@ class GameCubit extends Cubit<GameState> {
   final AppSharedPreferences _preferences;
 
   void startGame({required double screenHeight}) {
-    if (state is PlayingState) {
+    if (state is PlayingState || state is StartedPlayingState) {
       return;
     }
 
     emit(
-      PlayingState(
+      StartedPlayingState(
         startTime: DateTime.now(),
         map: GameMapGenerator(screenHeight: screenHeight).create(),
-        wasRestarted: state is GameOverState,
       ),
     );
   }
 
   void updateScore() {
-    if (state case final PlayingState state) {
+    if (state
+        case PlayingState(:final map, :final startTime) ||
+            StartedPlayingState(:final map, :final startTime)) {
       var reachedMilestones = 0;
 
       final distanceTraveled = state.calculateDistanceTravelled();
 
-      for (final milestone in state.map.scoreMilestones) {
+      for (final milestone in map.scoreMilestones) {
         if (distanceTraveled >= milestone) {
           reachedMilestones++;
         }
       }
 
-      emit(state.copyWith(score: reachedMilestones));
+      emit(
+        PlayingState(
+          startTime: startTime,
+          map: map,
+          score: reachedMilestones,
+        ),
+      );
     }
   }
 
   void gameOver() {
-    if (state case PlayingState(:final score)) {
+    if (state case PlayingState(:final score, :final startTime)) {
       emit(
         GameOverState(
+          startTime: startTime,
           score: GameScore(
             username: _preferences.username,
             value: score,
@@ -62,7 +70,9 @@ sealed class GameState with EquatableMixin {
   static const _gameHorizontalSpeed = 0.3; // pixels per millisecond
 
   double calculateDistanceTravelled() => switch (this) {
-    PlayingState(:final startTime) =>
+    StartedPlayingState(:final startTime) ||
+    PlayingState(:final startTime) ||
+    GameOverState(:final startTime) =>
       startTime.difference(DateTime.now()).inMilliseconds.abs() *
           _gameHorizontalSpeed,
     _ => 0,
@@ -76,35 +86,36 @@ class MainMenuGameState extends GameState {
   List<Object?> get props => [];
 }
 
-class PlayingState extends GameState {
-  const PlayingState({
+class StartedPlayingState extends GameState {
+  const StartedPlayingState({
     required this.startTime,
     required this.map,
     this.score = 0,
-    this.wasRestarted = false,
   });
 
   final DateTime startTime;
   final GameMap map;
   final int score;
-  final bool wasRestarted;
-
-  PlayingState copyWith({DateTime? startTime, GameMap? map, int? score}) =>
-      PlayingState(
-        startTime: startTime ?? this.startTime,
-        map: map ?? this.map,
-        score: score ?? this.score,
-      );
 
   @override
   List<Object?> get props => [startTime, map, score];
 }
 
+class PlayingState extends StartedPlayingState {
+  const PlayingState({
+    required super.startTime,
+    required super.map,
+    super.score = 0,
+  });
+}
+
 class GameOverState extends GameState {
   const GameOverState({
+    required this.startTime,
     required this.score,
   });
 
+  final DateTime startTime;
   final GameScore score;
 
   @override
