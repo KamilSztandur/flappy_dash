@@ -1,5 +1,7 @@
 import 'package:flappy_dash/common/language/language_cubit.dart';
 import 'package:flappy_dash/common/shared_preferences.dart';
+import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
+import 'package:flappy_dash/features/game/cubits/ui_visibility_cubit.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +33,12 @@ class GlobalProviders extends StatelessWidget {
 
               return LanguageCubit(preferredLanguage: prefs.language);
             },
+          ),
+          BlocProvider(
+            create: (context) => GameCubit(preferences: context.read()),
+          ),
+          BlocProvider(
+            create: (context) => UIVisibilityCubit(),
           ),
         ],
         child: child,

@@ -4,11 +4,15 @@ import 'dart:math';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
+import 'package:flame_bloc/flame_bloc.dart';
+import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/game.dart';
-import 'package:flappy_dash/features/game/models/game_stage.dart';
 
 class Player extends SpriteComponent
-    with HasGameReference<FlappyDashGame>, CollisionCallbacks {
+    with
+        HasGameReference<FlappyDashGame>,
+        CollisionCallbacks,
+        FlameBlocReader<GameCubit, GameState> {
   Player()
     : super(
         key: playerKey,
@@ -29,6 +33,8 @@ class Player extends SpriteComponent
 
   @override
   Future<void> onLoad() async {
+    await super.onLoad();
+
     sprite = await Sprite.load('player.jpg');
 
     add(CircleHitbox());
@@ -36,46 +42,45 @@ class Player extends SpriteComponent
 
   @override
   Future<void> update(double dt) async {
-    if (game.progress.stage == GameStage.gameOver) {
+    super.update(dt);
+
+    if (bloc.state is GameOverState) {
       return;
     }
 
-    final gameStarted = game.findByKey(playerKey) != null;
-    if (gameStarted) {
-      // If fell below the screen, then game over.
-      if (position.y > game.size.y / 2 + size.y / 2) {
-        await game.gameOver();
+    // FIXME: check for player position was here
 
-        return;
-      }
+    // If fell below the screen, then game over.
+    if (position.y > game.size.y / 2 + size.y / 2) {
+      bloc.gameOver();
 
-      final millisecondsSinceLastJump = lastJumpTime
-          .difference(DateTime.now())
-          .inMilliseconds
-          .abs();
-
-      // Apply basic gravity.
-      final gravityAcceleration = (millisecondsSinceLastJump / 5000).clamp(
-        0,
-        1,
-      );
-      velocity.y += 500 * gravityAcceleration;
-
-      // Calculate height based on velocity and current position
-      position += velocity * dt;
-
-      final gameRadius = game.size.y / 2;
-      position.y = position.y.clamp(-gameRadius, double.infinity);
-
-      // Rotate player upon jumping
-      if (millisecondsSinceLastJump > 650) {
-        angle = 0.5;
-      } else {
-        angle = velocity.y < 0 ? -0.5 : 0;
-      }
+      return;
     }
 
-    super.update(dt);
+    final millisecondsSinceLastJump = lastJumpTime
+        .difference(DateTime.now())
+        .inMilliseconds
+        .abs();
+
+    // Apply basic gravity.
+    final gravityAcceleration = (millisecondsSinceLastJump / 5000).clamp(
+      0,
+      1,
+    );
+    velocity.y += 500 * gravityAcceleration;
+
+    // Calculate height based on velocity and current position
+    position += velocity * dt;
+
+    final gameRadius = game.size.y / 2;
+    position.y = position.y.clamp(-gameRadius, double.infinity);
+
+    // Rotate player upon jumping
+    if (millisecondsSinceLastJump > 650) {
+      angle = 0.5;
+    } else {
+      angle = velocity.y < 0 ? -0.5 : 0;
+    }
   }
 
   void jump() {

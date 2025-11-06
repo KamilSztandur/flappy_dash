@@ -1,14 +1,19 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/rendering.dart';
+import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/components/player.dart';
+import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/game.dart';
 import 'package:flutter/material.dart';
 
 enum PipeAlignment { top, bottom }
 
 class Pipe extends SpriteComponent
-    with HasGameReference<FlappyDashGame>, CollisionCallbacks {
+    with
+        HasGameReference<FlappyDashGame>,
+        CollisionCallbacks,
+        FlameBlocReader<GameCubit, GameState> {
   Pipe({
     required this.globalOffset,
     required this.verticalOffset,
@@ -24,6 +29,8 @@ class Pipe extends SpriteComponent
 
   @override
   Future<void> onLoad() async {
+    await super.onLoad();
+
     sprite = await Sprite.load('pipe.png');
 
     final gameRadius = game.size.y / 2;
@@ -50,7 +57,7 @@ class Pipe extends SpriteComponent
         ),
       );
 
-      game.gameOver();
+      bloc.gameOver();
     }
 
     super.onCollision(intersectionPoints, other);
@@ -62,7 +69,7 @@ class Pipe extends SpriteComponent
   }
 
   void _updateScreenPosition() {
-    final localOffset = globalOffset - game.progress.horizontalOffset;
+    final localOffset = globalOffset - bloc.state.calculateDistanceTravelled();
     final gameRadius = game.size.y / 2;
 
     position = switch (alignment) {

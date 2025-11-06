@@ -233,6 +233,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  comms:
+    dependency: transitive
+    description:
+      name: comms
+      sha256: "4159075fec9dc49968f0f5732c1d068797499c97be7b9946f3a0931b00dd852f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   convert:
     dependency: transitive
     description:
@@ -345,6 +353,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.11"
+  flame_bloc:
+    dependency: "direct main"
+    description:
+      name: flame_bloc
+      sha256: "6a55612762c9a9e771aa3744db0f8bd61cfadf9a5a8e68cb755aff567cfebaa4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.12.18"
   flame_lint:
     dependency: "direct dev"
     description:
@@ -366,6 +382,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.1.1"
+  flutter_comms:
+    dependency: "direct main"
+    description:
+      name: flutter_comms
+      sha256: dd248bd7be6d3d8aa4cbe4b1a057f52cb5dc9683c5416f3903718b7a4b44285a
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   flutter_gen_core:
     dependency: transitive
     description:
@@ -382,6 +406,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.12.0"
+  flutter_hooks:
+    dependency: transitive
+    description:
+      name: flutter_hooks
+      sha256: cde36b12f7188c85286fba9b38cc5a902e7279f36dd676967106c041dc9dde70
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.5"
   flutter_localizations:
     dependency: "direct main"
     description: flutter

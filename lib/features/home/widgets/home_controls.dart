@@ -5,22 +5,17 @@ import 'package:flappy_dash/features/home/widgets/leaderboard_button.dart';
 import 'package:flutter/material.dart';
 
 class HomeControls extends StatelessWidget {
-  const HomeControls({
-    super.key,
-    required this.toggleUI,
-  });
-
-  final ValueChanged<bool> toggleUI;
+  const HomeControls({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       spacing: AppSpacings.s16.value,
-      children: [
-        const SwitchLanguageButton(),
-        EditUsernameButton(toggleUI: toggleUI),
-        const LeaderboardButton(),
+      children: const [
+        SwitchLanguageButton(),
+        EditUsernameButton(),
+        LeaderboardButton(),
       ],
     );
   }

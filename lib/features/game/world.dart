@@ -1,56 +1,70 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/components/background.dart';
 import 'package:flappy_dash/features/game/components/ground.dart';
 import 'package:flappy_dash/features/game/components/player.dart';
 import 'package:flappy_dash/features/game/components/score_display.dart';
-import 'package:flappy_dash/features/game/engine/game_map_generator.dart';
+import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/game.dart';
-import 'package:flappy_dash/features/game/models/game_map.dart';
-import 'package:flappy_dash/features/game/models/game_stage.dart';
 
 class FlappyDashWorld extends World
-    with TapCallbacks, HasGameReference<FlappyDashGame> {
+    with
+        TapCallbacks,
+        HasGameReference<FlappyDashGame>,
+        FlameBlocListenable<GameCubit, GameState>,
+        FlameBlocReader<GameCubit, GameState> {
   FlappyDashWorld();
 
   final player = Player();
   final scoreDisplay = ScoreDisplay();
-  late final GameMap gameMap;
 
   @override
   Future<void> onLoad() async {
-    gameMap = GameMapGenerator(gameSize: game.size).create();
+    await super.onLoad();
 
     add(Background());
-
     add(Ground());
   }
 
   @override
-  Future<void> update(double dt) async {
-    if (game.progress.stage == GameStage.game &&
-        game.findByKey(Player.playerKey) == null) {
-      gameMap.pipes.forEach(add);
-      add(player);
-      add(scoreDisplay);
+  void onNewState(GameState state) {
+    super.onNewState(state);
 
-      player.jump();
+    switch (state) {
+      case MainMenuGameState():
+        _maybeRemoveComponent(scoreDisplay, ScoreDisplay.scoreKey);
+        _maybeRemoveComponent(player, Player.playerKey);
+
+      case PlayingState(:final map):
+        map.pipes.forEach(add);
+        add(player);
+        add(scoreDisplay);
+
+        player.jump();
+
+      case GameOverState():
+        _maybeRemoveComponent(scoreDisplay, ScoreDisplay.scoreKey);
     }
+  }
 
-    if (game.progress.stage == GameStage.gameOver &&
-        game.findByKey(ScoreDisplay.scoreKey) != null) {
-      remove(scoreDisplay);
-    }
-
-    game.progress.updateScore(gameMap.scoreMilestones);
-
+  @override
+  void update(double dt) {
     super.update(dt);
+
+    bloc.updateScore();
   }
 
   @override
   void onTapDown(TapDownEvent event) {
-    player.jump();
-
     super.onTapDown(event);
+
+    player.jump();
+  }
+
+  void _maybeRemoveComponent(Component component, ComponentKey key) {
+    if (game.findByKey(key) != null) {
+      remove(component);
+    }
   }
 }

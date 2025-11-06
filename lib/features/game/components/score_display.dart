@@ -1,10 +1,17 @@
+import 'dart:async';
+
 import 'package:flame/components.dart';
+import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/common/score_formatter.dart';
 import 'package:flappy_dash/features/game/components/explosion.dart';
+import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/game.dart';
 import 'package:flutter/material.dart';
 
-class ScoreDisplay extends TextComponent with HasGameReference<FlappyDashGame> {
+class ScoreDisplay extends TextComponent
+    with
+        HasGameReference<FlappyDashGame>,
+        FlameBlocReader<GameCubit, GameState> {
   ScoreDisplay()
     : super(
         key: scoreKey,
@@ -21,19 +28,29 @@ class ScoreDisplay extends TextComponent with HasGameReference<FlappyDashGame> {
 
   @override
   Future<void> onLoad() async {
-    text = ScoreFormatter.format(game.progress.score);
+    await super.onLoad();
+
+    unawaited(_updateDisplayedScore());
 
     position = Vector2(0, -game.size.y / 2 + 100);
-
-    super.onLoad();
   }
 
   @override
-  Future<void> update(double dt) async {
-    final currentlyDisplayedScore = int.tryParse(text);
-    final currentScore = game.progress.score;
+  void update(double dt) {
+    super.update(dt);
 
-    if (currentlyDisplayedScore != null &&
+    _updateDisplayedScore();
+  }
+
+  Future<void> _updateDisplayedScore() async {
+    final currentlyDisplayedScore = int.tryParse(text);
+    final currentScore = switch (bloc.state) {
+      PlayingState(:final score) => score,
+      _ => null,
+    };
+
+    if (currentScore != null &&
+        currentlyDisplayedScore != null &&
         currentlyDisplayedScore != currentScore) {
       add(
         Explosion(
@@ -47,9 +64,9 @@ class ScoreDisplay extends TextComponent with HasGameReference<FlappyDashGame> {
       // Let's wait for explosion to start before updating the score
       await Future<void>.delayed(const Duration(milliseconds: 150));
 
-      text = ScoreFormatter.format(game.progress.score);
+      text = ScoreFormatter.format(currentScore);
+    } else {
+      text = currentScore != null ? ScoreFormatter.format(currentScore) : '';
     }
-
-    super.update(dt);
   }
 }

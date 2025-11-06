@@ -1,17 +1,16 @@
 import 'dart:math';
 
-import 'package:flame/components.dart';
 import 'package:flappy_dash/features/game/components/pipe.dart';
 import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flutter/material.dart';
 
 class GameMapGenerator {
   const GameMapGenerator({
-    required this.gameSize,
+    required this.screenHeight,
     this.totalPipes = 100,
   });
 
-  final Vector2 gameSize;
+  final double screenHeight;
   final int totalPipes;
 
   static const _minHoleSize = 150.0;
@@ -23,7 +22,7 @@ class GameMapGenerator {
 
     final random = Random();
 
-    final maxHoleSize = min(300, gameSize.y * 0.8);
+    final maxHoleSize = min(300, screenHeight * 0.8);
 
     for (var i = 0; i < totalPipes; i++) {
       final offset = 600.0 + i * 600.0;
@@ -36,7 +35,7 @@ class GameMapGenerator {
 
       final holePositionFactor = random.nextDouble();
 
-      final remainingHeight = gameSize.y - holeSize;
+      final remainingHeight = screenHeight - holeSize;
 
       pipes.addAll([
         Pipe(

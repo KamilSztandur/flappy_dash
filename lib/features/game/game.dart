@@ -1,59 +1,42 @@
 import 'dart:async';
 
 import 'package:flame/game.dart';
-import 'package:flame_audio/flame_audio.dart';
-import 'package:flappy_dash/features/game/models/game_progress.dart';
-import 'package:flappy_dash/features/game/models/game_stage.dart';
+import 'package:flame_bloc/flame_bloc.dart';
+import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
+import 'package:flappy_dash/features/game/models/game_music.dart';
 import 'package:flappy_dash/features/game/world.dart';
-import 'package:flutter/widgets.dart';
 
-typedef GameOverCallback = void Function(int score);
+class FlappyDashGame extends FlameGame
+    with FlameBlocListenable<GameCubit, GameState> {
+  FlappyDashGame() : super(world: FlappyDashWorld());
 
-class FlappyDashGame extends FlameGame with HasCollisionDetection {
-  FlappyDashGame({
-    required this.onGameOver,
-    required this.onGameStarted,
-  }) : super(world: FlappyDashWorld());
+  @override
+  Future<void> onNewState(GameState state) async {
+    super.onNewState(state);
 
-  final GameOverCallback onGameOver;
-  final VoidCallback onGameStarted;
+    switch (state) {
+      case MainMenuGameState():
+        unawaited(GameMusic.menu.play());
 
-  final progress = GameProgress();
+      case PlayingState(:final wasRestarted):
+        unawaited(GameMusic.game.play());
 
-  Future<void> init() async {
-    await FlameAudio.bgm.audioPlayer.setVolume(0.1);
-    await FlameAudio.bgm.play('menu_music.mp3');
-  }
+        if (wasRestarted) {
+          world = FlappyDashWorld();
+        }
 
-  Future<void> start() async {
-    await FlameAudio.bgm.stop();
-    unawaited(FlameAudio.bgm.play('game_music.mp3'));
+        if (paused) {
+          resumeEngine();
+        }
 
-    if (progress.stage == GameStage.gameOver) {
-      world = FlappyDashWorld();
+      case GameOverState():
+        unawaited(GameMusic.menu.play());
+
+        // Let's wait for engine to play music and then clean up after game
+        // before pausing it
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+
+        pauseEngine();
     }
-
-    progress.start();
-
-    if (paused) {
-      resumeEngine();
-    }
-
-    onGameStarted();
-  }
-
-  Future<void> gameOver() async {
-    await FlameAudio.bgm.stop();
-    unawaited(FlameAudio.bgm.play('menu_music.mp3'));
-    unawaited(FlameAudio.play('game_over.mp3'));
-
-    progress.gameOver();
-
-    // Let's wait for engine to clean up after game before pausing it
-    await Future<void>.delayed(const Duration(milliseconds: 100));
-
-    pauseEngine();
-
-    onGameOver(progress.score);
   }
 }

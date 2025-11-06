@@ -1,16 +1,15 @@
 import 'dart:math';
 
 import 'package:flappy_dash/design_system/spacings.dart';
+import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/resources/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainMenuOverlay extends StatefulWidget {
   const MainMenuOverlay({
     super.key,
-    required this.onStartTap,
   });
-
-  final VoidCallback onStartTap;
 
   static final _padding = AppSpacings.s32.all;
 
@@ -63,8 +62,10 @@ class _MainMenuOverlayState extends State<MainMenuOverlay>
 
     final screenSize = MediaQuery.sizeOf(context);
 
+    final gameCubit = context.watch<GameCubit>();
+
     return GestureDetector(
-      onTap: widget.onStartTap,
+      onTap: () => gameCubit.startGame(screenHeight: screenSize.height),
       behavior: HitTestBehavior.opaque,
       child: Center(
         child: ConstrainedBox(
