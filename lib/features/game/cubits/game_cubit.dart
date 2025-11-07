@@ -3,14 +3,19 @@ import 'package:flappy_dash/common/shared_preferences.dart';
 import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/utils/game_map_generator.dart';
+import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameCubit extends Cubit<GameState> {
-  GameCubit({required AppSharedPreferences preferences})
-    : _preferences = preferences,
-      super(const MainMenuGameState());
+  GameCubit({
+    required AppSharedPreferences preferences,
+    required LeaderboardRepository leaderboardRepository,
+  }) : _preferences = preferences,
+       _leaderboardRepository = leaderboardRepository,
+       super(const MainMenuGameState());
 
   final AppSharedPreferences _preferences;
+  final LeaderboardRepository _leaderboardRepository;
 
   void startGame({required double screenHeight}) {
     if (state is PlayingState || state is StartedPlayingState) {
@@ -49,15 +54,19 @@ class GameCubit extends Cubit<GameState> {
     }
   }
 
-  void gameOver() {
+  Future<void> gameOver() async {
     if (state case PlayingState(:final score, :final startTime)) {
+      final userScore = GameScore(
+        username: _preferences.username,
+        value: score,
+      );
+
+      await _leaderboardRepository.writeScore(userScore);
+
       emit(
         GameOverState(
           startTime: startTime,
-          score: GameScore(
-            username: _preferences.username,
-            value: score,
-          ),
+          score: userScore,
         ),
       );
     }

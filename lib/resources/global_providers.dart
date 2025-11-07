@@ -35,7 +35,10 @@ class GlobalProviders extends StatelessWidget {
             },
           ),
           BlocProvider(
-            create: (context) => GameCubit(preferences: context.read()),
+            create: (context) => GameCubit(
+              preferences: context.read(),
+              leaderboardRepository: context.read(),
+            ),
           ),
           BlocProvider(
             create: (context) => UIVisibilityCubit(),

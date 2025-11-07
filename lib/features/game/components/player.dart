@@ -46,7 +46,7 @@ class Player extends SpriteComponent
 
     // If fell below the screen, then game over.
     if (position.y > game.size.y / 2 + size.y / 2) {
-      bloc.gameOver();
+      unawaited(bloc.gameOver());
 
       return;
     }
