@@ -18,7 +18,7 @@ class Explosion extends SpriteAnimationComponent
 
     animation =
         SpriteSheet(
-          image: await game.images.load('spark.png'),
+          image: await game.images.load('explosion.png'),
           srcSize: Vector2(150, 150),
         ).createAnimation(
           row: 0,

@@ -48,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       floatingActionButton: hideUI ? null : const HomeControls(),
-      // TODO: Use Flutter Portal instead
       body: Stack(
         children: [
           GestureDetector(

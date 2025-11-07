@@ -66,7 +66,6 @@ class _MainMenuOverlayState extends State<MainMenuOverlay>
 
     return GestureDetector(
       onTap: () => gameCubit.startGame(screenHeight: screenSize.height),
-      behavior: HitTestBehavior.opaque,
       child: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(

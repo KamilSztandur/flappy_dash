@@ -94,7 +94,7 @@ class _EditUsernameDialogState extends State<EditUsernameDialog> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: foregroundColor,
-                      foregroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.blue,
                     ),
                     onPressed: () {
                       context.read<AppSharedPreferences>().setUsername(
