@@ -2,7 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/cubits/ui_visibility_cubit.dart';
-import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/features/home/widgets/flutter_tip_banner.dart';
 import 'package:flappy_dash/features/home/widgets/home_controls.dart';
 import 'package:flappy_dash/features/overlays/game_over_overlay.dart';
@@ -55,20 +55,20 @@ class _HomeScreenState extends State<HomeScreen> {
             behavior: HitTestBehavior.opaque,
             child: GameWidget(game: _game),
           ),
-          if (!hideUI)
-            switch (gameCubit.state) {
-              GameOverState() => const GameOverOverlay(),
-              MainMenuGameState() => const MainMenuOverlay(),
-              StartedPlayingState() || PlayingState() => PositionedDirectional(
-                top: isVertical ? null : AppSpacings.s32.value,
-                bottom: isVertical ? AppSpacings.s32.value : null,
-                start: isVertical ? AppSpacings.s32.value : null,
-                end: AppSpacings.s32.value,
-                child: const IgnorePointer(
-                  child: FlutterTipBanner(),
-                ),
+
+          switch (gameCubit.state) {
+            GameOverState() => const GameOverOverlay(),
+            MainMenuGameState() => const MainMenuOverlay(),
+            StartedPlayingState() || PlayingState() => PositionedDirectional(
+              top: isVertical ? null : AppSpacings.s32.value,
+              bottom: isVertical ? AppSpacings.s32.value : null,
+              start: isVertical ? AppSpacings.s32.value : null,
+              end: AppSpacings.s32.value,
+              child: const IgnorePointer(
+                child: FlutterTipBanner(),
               ),
-            },
+            ),
+          },
         ],
       ),
     );

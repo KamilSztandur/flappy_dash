@@ -1,21 +1,23 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:flame/rendering.dart';
 import 'package:flame_bloc/flame_bloc.dart';
-import 'package:flappy_dash/features/game/components/player.dart';
+import 'package:flappy_dash/features/game/components/dash.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
-import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/features/game/models/game_sounds.dart';
+import 'package:flappy_dash/resources/game_assets.dart';
 import 'package:flutter/material.dart';
 
-enum PipeAlignment { top, bottom }
+enum ObstacleAlignment { top, bottom }
 
-class Pipe extends SpriteComponent
+class Obstacle extends SpriteComponent
     with
         HasGameReference<FlappyDashGame>,
         CollisionCallbacks,
         FlameBlocReader<GameCubit, GameState> {
-  Pipe({
+  Obstacle({
     required this.globalOffset,
     required this.verticalOffset,
     required this.alignment,
@@ -23,7 +25,7 @@ class Pipe extends SpriteComponent
 
   static const horizontalVelocity = 5000.0;
 
-  final PipeAlignment alignment;
+  final ObstacleAlignment alignment;
   final double globalOffset;
   final double verticalOffset;
   bool wasHit = false;
@@ -32,13 +34,17 @@ class Pipe extends SpriteComponent
   Future<void> onLoad() async {
     await super.onLoad();
 
-    sprite = await Sprite.load('obstacle.png');
+    final obstacleAsset = [
+      GameAssets.obstacle1,
+      GameAssets.obstacle2,
+      GameAssets.obstacle3,
+    ].random();
 
-    final gameRadius = game.size.y / 2;
+    sprite = await Sprite.load(obstacleAsset.filename);
 
-    size = Vector2(100, gameRadius);
+    size = Vector2(100, game.size.y * 3 / 4);
 
-    if (alignment == PipeAlignment.top) {
+    if (alignment == ObstacleAlignment.top) {
       flipVertically();
     }
 
@@ -49,7 +55,7 @@ class Pipe extends SpriteComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Player && !wasHit) {
+    if (other is Dash && !wasHit) {
       wasHit = true;
 
       decorator.addLast(
@@ -76,11 +82,11 @@ class Pipe extends SpriteComponent
     final gameRadius = game.size.y / 2;
 
     position = switch (alignment) {
-      PipeAlignment.top => Vector2(
+      ObstacleAlignment.top => Vector2(
         localOffset,
         -gameRadius + verticalOffset,
       ),
-      PipeAlignment.bottom => Vector2(
+      ObstacleAlignment.bottom => Vector2(
         localOffset,
         gameRadius - verticalOffset,
       ),

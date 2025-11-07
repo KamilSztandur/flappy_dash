@@ -5,7 +5,7 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/common/score_formatter.dart';
 import 'package:flappy_dash/features/game/components/explosion.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
-import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flutter/material.dart';
 
 class ScoreDisplay extends TextComponent

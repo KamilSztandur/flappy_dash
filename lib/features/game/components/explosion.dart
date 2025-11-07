@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
-import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 
 class Explosion extends SpriteAnimationComponent
     with HasGameReference<FlappyDashGame> {

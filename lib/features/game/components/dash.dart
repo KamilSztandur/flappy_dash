@@ -4,15 +4,16 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
-import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/features/game/models/game_sounds.dart';
+import 'package:flappy_dash/resources/game_assets.dart';
 
-class Player extends SpriteComponent
+class Dash extends SpriteComponent
     with
         HasGameReference<FlappyDashGame>,
         CollisionCallbacks,
         FlameBlocReader<GameCubit, GameState> {
-  Player()
+  Dash()
     : super(
         key: playerKey,
         size: Vector2.all(75),
@@ -80,11 +81,11 @@ class Player extends SpriteComponent
   }
 
   Future<void> _resolveSprite() async {
-    if (velocity.y < 0) {
-      sprite = await Sprite.load('dash.png');
-    } else {
-      sprite = await Sprite.load('dash_jumping.png');
-    }
+    final dashSprite = velocity.y < 0
+        ? GameAssets.dash
+        : GameAssets.dashJumping;
+
+    sprite = await Sprite.load(dashSprite.filename);
   }
 
   void jump() {

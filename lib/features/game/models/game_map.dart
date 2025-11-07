@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flappy_dash/features/game/components/pipe.dart';
+import 'package:flappy_dash/features/game/components/obstacle.dart';
 
 class GameMap with EquatableMixin {
   GameMap({
@@ -7,7 +7,7 @@ class GameMap with EquatableMixin {
     required this.scoreMilestones,
   });
 
-  final List<Pipe> pipes;
+  final List<Obstacle> pipes;
   final Set<double> scoreMilestones;
 
   @override

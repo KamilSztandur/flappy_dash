@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flappy_dash/features/game/components/pipe.dart';
+import 'package:flappy_dash/features/game/components/obstacle.dart';
 import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class GameMapGenerator {
   static const _decreasementCount = 30;
 
   GameMap create() {
-    final pipes = <Pipe>[];
+    final pipes = <Obstacle>[];
 
     final random = Random();
 
@@ -38,14 +38,14 @@ class GameMapGenerator {
       final remainingHeight = screenHeight - holeSize;
 
       pipes.addAll([
-        Pipe(
+        Obstacle(
           globalOffset: offset,
-          alignment: PipeAlignment.top,
+          alignment: ObstacleAlignment.top,
           verticalOffset: remainingHeight * (1 - holePositionFactor) + 50,
         ),
-        Pipe(
+        Obstacle(
           globalOffset: offset,
-          alignment: PipeAlignment.bottom,
+          alignment: ObstacleAlignment.bottom,
           verticalOffset: remainingHeight * holePositionFactor - 50,
         ),
       ]);

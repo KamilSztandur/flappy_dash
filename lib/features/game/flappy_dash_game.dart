@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
-import 'package:flappy_dash/features/game/models/game_music.dart';
 import 'package:flappy_dash/features/game/world.dart';
+import 'package:flappy_dash/resources/game_music.dart';
 
 class FlappyDashGame extends FlameGame with HasCollisionDetection {
   FlappyDashGame({required this.gameCubit});
@@ -43,7 +43,7 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
 
         // Let's wait for engine to play music and then clean up after game
         // before pausing it
-        await Future<void>.delayed(const Duration(milliseconds: 100));
+        await Future<void>.delayed(const Duration(milliseconds: 50));
 
         pauseEngine();
     }

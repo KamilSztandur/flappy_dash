@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flappy_dash/features/game/components/background.dart';
-import 'package:flappy_dash/features/game/components/ground.dart';
-import 'package:flappy_dash/features/game/components/player.dart';
+import 'package:flappy_dash/features/game/components/dash.dart';
+import 'package:flappy_dash/features/game/components/road.dart';
 import 'package:flappy_dash/features/game/components/score_display.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
-import 'package:flappy_dash/features/game/game.dart';
+import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/features/game/providers/game_providers.dart';
 
 class GameWorld extends World
@@ -17,7 +17,7 @@ class GameWorld extends World
   final GameCubit gameCubit;
   StreamSubscription<GameState>? _gameStateSubscription;
 
-  Player? player;
+  Dash? player;
   ScoreDisplay? scoreDisplay;
 
   static final _gameElementsKey = ComponentKey.unique();
@@ -34,8 +34,8 @@ class GameWorld extends World
         key: _gameBackgroundKey,
         gameCubit: gameCubit,
         components: [
-          Background(),
-          Ground(),
+          CityBackground(),
+          Road(),
         ],
       ),
     );
@@ -59,7 +59,7 @@ class GameWorld extends World
       case StartedPlayingState(:final map):
         _maybeRemoveComponent(_gameElementsKey);
 
-        player = Player();
+        player = Dash();
         scoreDisplay = ScoreDisplay();
 
         add(
