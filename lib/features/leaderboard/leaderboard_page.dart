@@ -26,7 +26,7 @@ class LeaderboardScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.yellow,
       ),
-      backgroundColor: Colors.green.shade900,
+      backgroundColor: Colors.deepPurple,
       body: scores.isEmpty
           ? const LeaderboardEmptyView()
           : LeaderboardView(scores: scores),

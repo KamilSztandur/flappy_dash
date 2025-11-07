@@ -18,7 +18,7 @@ class Background extends ParallaxComponent<FlappyDashGame>
 
     final sky = ParallaxLayer(
       ParallaxImage(
-        await game.images.load('sky.webp'),
+        await game.images.load('city.jpg'),
         repeat: ImageRepeat.repeatX,
       ),
       velocityMultiplier: Vector2(isGameOngoing ? 15 : 0, 0),

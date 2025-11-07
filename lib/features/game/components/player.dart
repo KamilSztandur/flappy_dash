@@ -31,7 +31,7 @@ class Player extends SpriteComponent
   Future<void> onLoad() async {
     await super.onLoad();
 
-    sprite = await Sprite.load('player.jpg');
+    await _resolveSprite();
 
     add(CircleHitbox());
   }
@@ -75,13 +75,24 @@ class Player extends SpriteComponent
     } else {
       angle = velocity.y < 0 ? -0.5 : 0;
     }
+
+    await _resolveSprite();
+  }
+
+  Future<void> _resolveSprite() async {
+    if (velocity.y < 0) {
+      sprite = await Sprite.load('dash.png');
+    } else {
+      sprite = await Sprite.load('dash_jumping.png');
+    }
   }
 
   void jump() {
     unawaited(GameSounds.playRandomJump());
 
     lastJumpTime = DateTime.now();
-    velocity.y = velocity.y.clamp(2 * jumpVelocity, 0);
+    velocity.y = velocity.y.clamp(0.5 * jumpVelocity, 0);
+
     velocity.y += jumpVelocity;
   }
 }

@@ -32,7 +32,7 @@ class Pipe extends SpriteComponent
   Future<void> onLoad() async {
     await super.onLoad();
 
-    sprite = await Sprite.load('pipe.png');
+    sprite = await Sprite.load('obstacle.png');
 
     final gameRadius = game.size.y / 2;
 

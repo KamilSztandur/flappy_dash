@@ -15,7 +15,7 @@ class Ground extends ParallaxComponent<FlappyDashGame>
 
     await _toggleParalax(toggled: false);
 
-    position = Vector2(-game.size.x / 2, -game.size.y / 4);
+    position = Vector2(-game.size.x / 2, -game.size.y / 30);
   }
 
   @override
@@ -30,13 +30,13 @@ class Ground extends ParallaxComponent<FlappyDashGame>
       await _toggleParalax(toggled: true);
     }
 
-    position = Vector2(-game.size.x / 2, -game.size.y / 4);
+    position = Vector2(-game.size.x / 2, -game.size.y / 30);
   }
 
   Future<void> _toggleParalax({required bool toggled}) async {
     final sky = ParallaxLayer(
       ParallaxImage(
-        await game.images.load('grass.png'),
+        await game.images.load('trees.png'),
         repeat: ImageRepeat.repeatX,
       ),
       velocityMultiplier: Vector2(toggled ? 15 : 0, 0),

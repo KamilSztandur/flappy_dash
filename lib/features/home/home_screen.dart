@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final uiVisibilityCubit = context.watch<UIVisibilityCubit>();
 
-    final hideControls = switch (gameCubit.state) {
+    final hideUI = switch (gameCubit.state) {
       PlayingState() => true,
       _ => switch (uiVisibilityCubit.state) {
         UIVisibleState() => false,
@@ -47,22 +47,28 @@ class _HomeScreenState extends State<HomeScreen> {
     };
 
     return Scaffold(
-      floatingActionButton: hideControls ? null : const HomeControls(),
+      floatingActionButton: hideUI ? null : const HomeControls(),
       // TODO: Use Flutter Portal instead
       body: Stack(
         children: [
-          GameWidget(game: _game),
-          switch (gameCubit.state) {
-            GameOverState() => const GameOverOverlay(),
-            MainMenuGameState() => const MainMenuOverlay(),
-            StartedPlayingState() || PlayingState() => PositionedDirectional(
-              top: isVertical ? null : AppSpacings.s32.value,
-              bottom: isVertical ? AppSpacings.s32.value : null,
-              start: isVertical ? AppSpacings.s32.value : null,
-              end: AppSpacings.s32.value,
-              child: const FlutterTipBanner(),
-            ),
-          },
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            child: GameWidget(game: _game),
+          ),
+          if (!hideUI)
+            switch (gameCubit.state) {
+              GameOverState() => const GameOverOverlay(),
+              MainMenuGameState() => const MainMenuOverlay(),
+              StartedPlayingState() || PlayingState() => PositionedDirectional(
+                top: isVertical ? null : AppSpacings.s32.value,
+                bottom: isVertical ? AppSpacings.s32.value : null,
+                start: isVertical ? AppSpacings.s32.value : null,
+                end: AppSpacings.s32.value,
+                child: const IgnorePointer(
+                  child: FlutterTipBanner(),
+                ),
+              ),
+            },
         ],
       ),
     );
