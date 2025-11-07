@@ -14,7 +14,7 @@ class LeaderboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: AppSpacings.s32.all,
+      padding: AppSpacings.s24.vertical,
       itemCount: scores.length,
       separatorBuilder: (context, index) => AppSpacings.s16.verticalSpace,
       itemBuilder: (context, index) => ScoreListing(
