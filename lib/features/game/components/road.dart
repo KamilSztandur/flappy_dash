@@ -10,12 +10,7 @@ class Road extends PositionComponent with HasGameReference<FlappyDashGame> {
   Future<void> onLoad() async {
     await super.onLoad();
 
-    size = Vector2(game.size.x, 100);
-
-    position = Vector2(
-      -game.size.x / 2,
-      game.size.y / 2 - size.y,
-    );
+    _positionAndSize();
 
     add(
       ParallaxComponent(
@@ -33,6 +28,22 @@ class Road extends PositionComponent with HasGameReference<FlappyDashGame> {
           baseVelocity: Vector2(8.5, 0),
         ),
       ),
+    );
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    _positionAndSize();
+  }
+
+  void _positionAndSize() {
+    size = Vector2(game.size.x * 5, 100);
+
+    position = Vector2(
+      -game.size.x / 2,
+      game.size.y / 2 - size.y,
     );
   }
 }

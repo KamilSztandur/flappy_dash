@@ -296,6 +296,12 @@ abstract class AppLocalizations {
   /// **'TAP ANYWHERE TO RELEASE THE BIRD'**
   String get main_menu_press_anywhere_to_start;
 
+  /// No description provided for @phone_emulator_wrapper_switch_to_fullscreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to desktop mode'**
+  String get phone_emulator_wrapper_switch_to_fullscreen;
+
   /// No description provided for @settings_scoreboard.
   ///
   /// In en, this message translates to:

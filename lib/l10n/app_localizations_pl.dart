@@ -142,6 +142,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'STUKNIJ GDZIEKOLWIEK, ABY UWOLNIĆ PTAKA';
 
   @override
+  String get phone_emulator_wrapper_switch_to_fullscreen =>
+      'Powróć do trybu desktopowego';
+
+  @override
   String get settings_scoreboard => 'Tablica wyników';
 
   @override

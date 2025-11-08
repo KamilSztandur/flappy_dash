@@ -38,4 +38,20 @@ class CityBackground extends ParallaxComponent<FlappyDashGame> {
 
     size = game.size;
   }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    _positionAndSize();
+  }
+
+  void _positionAndSize() {
+    position = Vector2(
+      -game.size.x / 2,
+      -game.size.y / 2,
+    );
+
+    size = game.size;
+  }
 }

@@ -55,6 +55,7 @@
     "leaderboard_empty_title": "No scores yet!",
     "leaderboard_title": "Leaderboard",
     "main_menu_press_anywhere_to_start": "TAP ANYWHERE TO RELEASE THE BIRD",
+    "phone_emulator_wrapper_switch_to_fullscreen": "Switch to desktop mode",
     "settings_scoreboard": "Scoreboard",
     "settings_settings": "Settings"
 }

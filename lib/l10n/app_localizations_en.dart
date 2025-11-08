@@ -140,6 +140,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'TAP ANYWHERE TO RELEASE THE BIRD';
 
   @override
+  String get phone_emulator_wrapper_switch_to_fullscreen =>
+      'Switch to desktop mode';
+
+  @override
   String get settings_scoreboard => 'Scoreboard';
 
   @override
