@@ -9,6 +9,8 @@ class LeaderboardEmptyView extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = l10n(context);
 
+    const foregroundColor = Colors.white;
+
     return Center(
       child: Padding(
         padding: AppSpacings.s32.all,
@@ -18,20 +20,20 @@ class LeaderboardEmptyView extends StatelessWidget {
             const Icon(
               Icons.emoji_events_outlined,
               size: 64,
-              color: Colors.yellow,
+              color: foregroundColor,
             ),
             const SizedBox(height: 16),
             Text(
               s.leaderboard_empty_title,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.yellow,
+                color: foregroundColor,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               s.leaderboard_empty_subtitle,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.yellow,
+                color: foregroundColor,
               ),
             ),
           ],
