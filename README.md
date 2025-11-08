@@ -4,22 +4,11 @@ Flappy bird but in Flutter! A fun game built with Flutter and the Flame game eng
 
 ## 🎮 Play Online
 
-You can play the game at: [https://YOUR_GITHUB_USERNAME.github.io/flappy_dash/](https://YOUR_GITHUB_USERNAME.github.io/flappy_dash/)
-
-(Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username)
+You can play the game at: [https://kamilsztandur.github.io/flappy_dash/](https://kamilsztandur.github.io/flappy_dash/)
 
 ## 🚀 Deployment
 
 This project is automatically deployed to GitHub Pages using GitHub Actions. Every push to the `main` branch triggers a new deployment.
-
-### Setting up GitHub Pages (First Time Setup)
-
-After pushing these changes to GitHub, you need to configure GitHub Pages:
-
-1. Go to your repository on GitHub
-2. Click on **Settings** → **Pages**
-3. Under **Source**, select **GitHub Actions**
-4. The site will automatically deploy on the next push to `main`
 
 ## 🛠️ Development
 
@@ -29,46 +18,6 @@ After pushing these changes to GitHub, you need to configure GitHub Pages:
 - Dart SDK 3.9.2 or higher
 
 ### Getting Started
-
-1. Clone the repository
-```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/flappy_dash.git
-cd flappy_dash
-```
-
-2. Install dependencies
-```bash
-flutter pub get
-```
-
-3. Run the app
-```bash
-# For web
-flutter run -d chrome
-
-# For desktop (macOS)
-flutter run -d macos
-
-# For desktop (Linux)
-flutter run -d linux
-```
-
-### Building
-
-#### Web
-```bash
-flutter build web --release --base-href "/flappy_dash/"
-```
-
-#### macOS
-```bash
-flutter build macos --release
-```
-
-#### Linux
-```bash
-flutter build linux --release
-```
 
 ## 📁 Project Structure
 
@@ -91,8 +40,3 @@ flutter build linux --release
 - **Flame** - Game engine
 - **Bloc/Cubit** - State management
 - **Hive** - Local storage
-- **SQLite** - Database for leaderboard
-
-## 📝 License
-
-This project is open source and available under the MIT License.
