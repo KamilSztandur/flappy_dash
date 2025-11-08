@@ -16,9 +16,11 @@ class Dash extends SpriteComponent
   Dash()
     : super(
         key: playerKey,
-        size: Vector2.all(75),
+        size: Vector2.all(dashSize),
         anchor: Anchor.center,
       );
+
+  static const dashSize = 75.0;
 
   static final playerKey = ComponentKey.unique();
   static const gravitalVelocity = 100.0;

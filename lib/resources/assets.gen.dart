@@ -14,6 +14,46 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart' as _svg;
 import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
+class $AssetsAudioGen {
+  const $AssetsAudioGen();
+
+  /// File path: assets/audio/crash.mp3
+  String get crash => 'assets/audio/crash.mp3';
+
+  /// File path: assets/audio/flutter_tip.mp3
+  String get flutterTip => 'assets/audio/flutter_tip.mp3';
+
+  /// File path: assets/audio/game_music.mp3
+  String get gameMusic => 'assets/audio/game_music.mp3';
+
+  /// File path: assets/audio/game_over_2.mp3
+  String get gameOver2 => 'assets/audio/game_over_2.mp3';
+
+  /// File path: assets/audio/jump_1.mp3
+  String get jump1 => 'assets/audio/jump_1.mp3';
+
+  /// File path: assets/audio/jump_2.mp3
+  String get jump2 => 'assets/audio/jump_2.mp3';
+
+  /// File path: assets/audio/jump_3.mp3
+  String get jump3 => 'assets/audio/jump_3.mp3';
+
+  /// File path: assets/audio/menu_music.mp3
+  String get menuMusic => 'assets/audio/menu_music.mp3';
+
+  /// List of all assets
+  List<String> get values => [
+    crash,
+    flutterTip,
+    gameMusic,
+    gameOver2,
+    jump1,
+    jump2,
+    jump3,
+    menuMusic,
+  ];
+}
+
 class $AssetsFlagsGen {
   const $AssetsFlagsGen();
 
@@ -30,28 +70,52 @@ class $AssetsFlagsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/grass.png
-  AssetGenImage get grass => const AssetGenImage('assets/images/grass.png');
+  /// File path: assets/images/city.jpg
+  AssetGenImage get city => const AssetGenImage('assets/images/city.jpg');
 
-  /// File path: assets/images/pipe.png
-  AssetGenImage get pipe => const AssetGenImage('assets/images/pipe.png');
+  /// File path: assets/images/dash.png
+  AssetGenImage get dash => const AssetGenImage('assets/images/dash.png');
 
-  /// File path: assets/images/player.jpg
-  AssetGenImage get player => const AssetGenImage('assets/images/player.jpg');
+  /// File path: assets/images/dash_jumping.png
+  AssetGenImage get dashJumping =>
+      const AssetGenImage('assets/images/dash_jumping.png');
 
-  /// File path: assets/images/sky.webp
-  AssetGenImage get sky => const AssetGenImage('assets/images/sky.webp');
+  /// File path: assets/images/explosion.png
+  AssetGenImage get explosion =>
+      const AssetGenImage('assets/images/explosion.png');
 
-  /// File path: assets/images/spark.png
-  AssetGenImage get spark => const AssetGenImage('assets/images/spark.png');
+  /// File path: assets/images/obstacle_1.png
+  AssetGenImage get obstacle1 =>
+      const AssetGenImage('assets/images/obstacle_1.png');
+
+  /// File path: assets/images/obstacle_2.png
+  AssetGenImage get obstacle2 =>
+      const AssetGenImage('assets/images/obstacle_2.png');
+
+  /// File path: assets/images/obstacle_3.png
+  AssetGenImage get obstacle3 =>
+      const AssetGenImage('assets/images/obstacle_3.png');
+
+  /// File path: assets/images/road.jpg
+  AssetGenImage get road => const AssetGenImage('assets/images/road.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [grass, pipe, player, sky, spark];
+  List<AssetGenImage> get values => [
+    city,
+    dash,
+    dashJumping,
+    explosion,
+    obstacle1,
+    obstacle2,
+    obstacle3,
+    road,
+  ];
 }
 
 class Assets {
   const Assets._();
 
+  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsFlagsGen flags = $AssetsFlagsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }

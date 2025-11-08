@@ -1,7 +1,7 @@
-import 'dart:math';
-
 import 'package:flappy_dash/design_system/spacings.dart';
+import 'package:flappy_dash/features/game/components/dash.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
+import 'package:flappy_dash/resources/assets.gen.dart';
 import 'package:flappy_dash/resources/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +10,6 @@ class MainMenuOverlay extends StatefulWidget {
   const MainMenuOverlay({
     super.key,
   });
-
-  static final _padding = AppSpacings.s32.all;
 
   @override
   State<MainMenuOverlay> createState() => _MainMenuOverlayState();
@@ -66,32 +64,37 @@ class _MainMenuOverlayState extends State<MainMenuOverlay>
 
     return GestureDetector(
       onTap: () => gameCubit.startGame(screenHeight: screenSize.height),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: min(
-              screenSize.width - MainMenuOverlay._padding.horizontal,
-              300,
-            ),
-          ),
-          child: AnimatedBuilder(
-            animation: _bounceController,
-            builder: (context, child) {
-              final scale = _bounceAnimation.value;
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: AppSpacings.s32.all,
+        child: AnimatedBuilder(
+          animation: _bounceController,
+          builder: (context, child) {
+            final scale = _bounceAnimation.value;
 
-              return Transform.scale(
-                scale: scale,
-                child: Text(
-                  s.main_menu_press_anywhere_to_start,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Colors.yellow,
-                    fontWeight: FontWeight.bold,
+            return Transform.scale(
+              scale: scale,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Assets.images.dash.image(
+                    width: Dash.dashSize,
+                    height: Dash.dashSize,
                   ),
-                ),
-              );
-            },
-          ),
+                  AppSpacings.s16.verticalSpace,
+                  Text(
+                    s.main_menu_press_anywhere_to_start,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: Colors.yellow,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
