@@ -22,6 +22,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.2.2
   hive_ce: ^2.15.1
+  icons_launcher: ^3.0.3
   intl: ^0.20.2
   path_provider: ^2.1.5
   provider: ^6.1.5+1
@@ -47,3 +48,9 @@ flutter:
     - assets/audio/
     - assets/flags/
     - assets/images/
+
+icons_launcher:
+  image_path: "assets/logo.png"
+  platforms:
+    web:
+      enable: true
