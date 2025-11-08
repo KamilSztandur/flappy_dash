@@ -5,8 +5,8 @@ import 'package:flame/components.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
-import 'package:flappy_dash/resources/game_sounds.dart';
 import 'package:flappy_dash/resources/game_assets.dart';
+import 'package:flappy_dash/resources/game_sounds.dart';
 
 class Dash extends SpriteComponent
     with
