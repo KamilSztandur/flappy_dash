@@ -4,13 +4,9 @@ import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_reposi
 import 'package:flappy_dash/resources/global_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await windowManager.ensureInitialized();
-  await WindowManager.instance.setFullScreen(true);
 
   await LeaderboardRepository.init();
 
