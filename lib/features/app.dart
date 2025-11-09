@@ -1,6 +1,6 @@
+import 'package:flame_splash_screen/flame_splash_screen.dart';
 import 'package:flappy_dash/common/language/language_cubit.dart';
 import 'package:flappy_dash/features/home/home_screen.dart';
-import 'package:flappy_dash/features/phone_emulator/phone_emulator_wrapper.dart';
 import 'package:flappy_dash/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,8 +24,11 @@ class _FlappyDashAppState extends State<FlappyDashApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: languageCubit.state.locale,
-      home: PhoneEmulatorWrapper(
-        child: HomeScreen(key: _homeScreenKey),
+      home: FlameSplashScreen(
+        theme: FlameSplashTheme.dark,
+        onFinish: (context) => Navigator.of(context).pushReplacement(
+          HomeRoute(homeKey: _homeScreenKey),
+        ),
       ),
     );
   }

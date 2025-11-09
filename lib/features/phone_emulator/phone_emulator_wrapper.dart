@@ -52,8 +52,8 @@ class _PhoneEmulatorWrapperState extends State<PhoneEmulatorWrapper> {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white38,
-                  foregroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.yellow,
                 ),
                 onPressed: () => context.read<AppDisplayModeCubit>().set(
                   AppDisplayMode.desktop,

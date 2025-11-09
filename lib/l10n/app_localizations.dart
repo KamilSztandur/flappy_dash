@@ -302,6 +302,12 @@ abstract class AppLocalizations {
   /// **'Switch to desktop mode'**
   String get phone_emulator_wrapper_switch_to_fullscreen;
 
+  /// No description provided for @phone_emulator_wrapper_switch_to_phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to Phone Emulator Mode'**
+  String get phone_emulator_wrapper_switch_to_phone;
+
   /// No description provided for @settings_scoreboard.
   ///
   /// In en, this message translates to:

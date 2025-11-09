@@ -144,6 +144,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Switch to desktop mode';
 
   @override
+  String get phone_emulator_wrapper_switch_to_phone =>
+      'Switch to Phone Emulator Mode';
+
+  @override
   String get settings_scoreboard => 'Scoreboard';
 
   @override

@@ -146,6 +146,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Powróć do trybu desktopowego';
 
   @override
+  String get phone_emulator_wrapper_switch_to_phone =>
+      'Przełącz w tryb emulacji telefonu';
+
+  @override
   String get settings_scoreboard => 'Tablica wyników';
 
   @override

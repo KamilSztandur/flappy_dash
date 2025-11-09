@@ -13,15 +13,26 @@ class HomeControls extends StatelessWidget {
     final screenSize = MediaQuery.sizeOf(context);
     final isVertical = screenSize.width < screenSize.height;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      spacing: AppSpacings.s16.value,
-      children: [
-        if (!isVertical) const SwitchToPhoneEmulatorModeButton(),
-        const SwitchLanguageButton(),
-        const EditUsernameButton(),
-        const LeaderboardButton(),
-      ],
+    return SafeArea(
+      child: Padding(
+        padding: !isVertical ? AppSpacings.s48.top : AppSpacings.zero.all,
+        child: Column(
+          spacing: AppSpacings.s16.value,
+          mainAxisSize: !isVertical ? MainAxisSize.max : MainAxisSize.min,
+          crossAxisAlignment: !isVertical
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.center,
+          children: [
+            if (!isVertical) ...[
+              const SwitchToPhoneEmulatorModeButton(),
+              const Spacer(),
+            ],
+            const SwitchLanguageButton(),
+            const EditUsernameButton(),
+            const LeaderboardButton(),
+          ],
+        ),
+      ),
     );
   }
 }

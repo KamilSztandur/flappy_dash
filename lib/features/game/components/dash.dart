@@ -91,7 +91,7 @@ class Dash extends SpriteComponent
         ? GameAssets.dash
         : GameAssets.dashJumping;
 
-    sprite = await Sprite.load(dashSprite.filename);
+    sprite = await game.loadSprite(dashSprite.filename);
   }
 
   void jump() {

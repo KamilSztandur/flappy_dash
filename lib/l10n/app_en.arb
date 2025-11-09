@@ -56,6 +56,7 @@
     "leaderboard_title": "Leaderboard",
     "main_menu_press_anywhere_to_start": "TAP ANYWHERE TO RELEASE THE BIRD",
     "phone_emulator_wrapper_switch_to_fullscreen": "Switch to desktop mode",
+    "phone_emulator_wrapper_switch_to_phone": "Switch to Phone Emulator Mode",
     "settings_scoreboard": "Scoreboard",
     "settings_settings": "Settings"
 }
