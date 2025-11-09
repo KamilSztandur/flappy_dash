@@ -16,6 +16,7 @@ class ScoreDisplay extends TextComponent
     : super(
         key: scoreKey,
         anchor: Anchor.center,
+        priority: 5,
         textRenderer: TextPaint(
           style: const TextStyle(
             color: Colors.yellow,

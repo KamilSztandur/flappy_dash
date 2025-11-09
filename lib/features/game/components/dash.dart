@@ -18,6 +18,7 @@ class Dash extends SpriteComponent
         key: playerKey,
         size: Vector2.all(dashSize),
         anchor: Anchor.center,
+        priority: 3,
       );
 
   static const dashSize = 75.0;
@@ -94,7 +95,7 @@ class Dash extends SpriteComponent
     unawaited(GameSounds.playRandomJump());
 
     lastJumpTime = DateTime.now();
-    velocity.y = velocity.y.clamp(0.5 * jumpVelocity, 0);
+    velocity.y = velocity.y.clamp(1.5 * jumpVelocity, 0);
 
     velocity.y += jumpVelocity;
   }

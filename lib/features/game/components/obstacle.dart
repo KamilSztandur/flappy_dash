@@ -21,7 +21,7 @@ class Obstacle extends SpriteComponent
     required this.globalOffset,
     required this.verticalOffset,
     required this.alignment,
-  }) : super(anchor: Anchor.topCenter);
+  }) : super(anchor: Anchor.topCenter, priority: 2);
 
   static const horizontalVelocity = 5000.0;
 
@@ -42,7 +42,7 @@ class Obstacle extends SpriteComponent
 
     sprite = await Sprite.load(obstacleAsset.filename);
 
-    size = Vector2(100, game.size.y * 3 / 4);
+    size = Vector2(100, game.size.y * 0.85);
 
     if (alignment == ObstacleAlignment.top) {
       flipVertically();

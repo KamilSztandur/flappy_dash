@@ -6,7 +6,7 @@ import 'package:flappy_dash/resources/game_assets.dart';
 import 'package:flutter/material.dart';
 
 class CityBackground extends ParallaxComponent<FlappyDashGame> {
-  CityBackground();
+  CityBackground() : super(priority: 0);
 
   @override
   Future<void> onLoad() async {

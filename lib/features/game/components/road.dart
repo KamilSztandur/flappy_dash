@@ -4,7 +4,7 @@ import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flutter/painting.dart';
 
 class Road extends PositionComponent with HasGameReference<FlappyDashGame> {
-  Road();
+  Road() : super(priority: 1);
 
   @override
   Future<void> onLoad() async {

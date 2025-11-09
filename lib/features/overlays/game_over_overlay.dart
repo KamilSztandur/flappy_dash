@@ -28,7 +28,7 @@ class GameOverOverlay extends StatelessWidget {
     );
 
     return GestureDetector(
-      onTap: () => gameCubit.startGame(screenHeight: screenSize.height),
+      onTap: () => gameCubit.startGame(screenSize: screenSize),
       behavior: HitTestBehavior.opaque,
       child: Column(
         spacing: AppSpacings.s16.value,

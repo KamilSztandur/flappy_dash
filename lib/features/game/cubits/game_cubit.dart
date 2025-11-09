@@ -4,6 +4,7 @@ import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/utils/game_map_generator.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameCubit extends Cubit<GameState> {
@@ -17,7 +18,7 @@ class GameCubit extends Cubit<GameState> {
   final AppSharedPreferences _preferences;
   final LeaderboardRepository _leaderboardRepository;
 
-  void startGame({required double screenHeight}) {
+  void startGame({required Size screenSize}) {
     if (state is PlayingState || state is StartedPlayingState) {
       return;
     }
@@ -25,7 +26,7 @@ class GameCubit extends Cubit<GameState> {
     emit(
       StartedPlayingState(
         startTime: DateTime.now(),
-        map: GameMapGenerator(screenHeight: screenHeight).create(),
+        map: GameMapGenerator(screenSize: screenSize).create(),
         isRestart: state is GameOverState,
       ),
     );

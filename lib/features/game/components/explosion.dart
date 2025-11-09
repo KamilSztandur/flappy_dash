@@ -10,6 +10,7 @@ class Explosion extends SpriteAnimationComponent
     : super(
         anchor: Anchor.center,
         size: Vector2.all(200),
+        priority: 4,
       );
 
   @override

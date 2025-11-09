@@ -10,6 +10,7 @@ import 'package:flappy_dash/features/game/components/score_display.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/features/game/providers/game_provider.dart';
+import 'package:flappy_dash/features/game/utils/game_map_generator.dart';
 
 class GameWorld extends World
     with TapCallbacks, HasGameReference<FlappyDashGame> {
@@ -40,6 +41,16 @@ class GameWorld extends World
     super.update(dt);
 
     gameCubit.updateScore();
+
+    if (gameCubit.state
+        case PlayingState(:final map) || StartedPlayingState(:final map)) {
+      GameMapGenerator.updateRenderedObstacles(
+        gameProvider,
+        screenSize: game.size,
+        obstacles: map.obstacles,
+        distanceTravelled: gameCubit.state.calculateDistanceTravelled(),
+      );
+    }
   }
 
   void _gameListener(GameState state) {
@@ -50,11 +61,19 @@ class GameWorld extends World
 
       case StartedPlayingState(:final isRestart):
         if (isRestart) {
-          _tearDownGameElements();
-          _setupGameElements(state);
-        } else {
-          _setupGameElements(state);
+          gameProvider.removeWhere(
+            (component) => component is! CityBackground && component is! Road,
+          );
         }
+
+        final player = Dash();
+
+        gameProvider.addAll([
+          Dash(),
+          ScoreDisplay(),
+        ]);
+
+        player.jump();
 
       case GameOverState():
         final component = game.findByKey(ScoreDisplay.scoreKey);
@@ -76,23 +95,5 @@ class GameWorld extends World
     _gameStateSubscription?.cancel();
 
     super.onRemove();
-  }
-
-  void _setupGameElements(StartedPlayingState state) {
-    final player = Dash();
-
-    gameProvider.addAll([
-      ...state.map.pipes,
-      Dash(),
-      ScoreDisplay(),
-    ]);
-
-    player.jump();
-  }
-
-  void _tearDownGameElements() {
-    gameProvider.removeWhere(
-      (component) => component is! CityBackground && component is! Road,
-    );
   }
 }
