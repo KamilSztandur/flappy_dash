@@ -4,6 +4,7 @@ import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/utils/game_map_generator.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
+import 'package:flappy_dash/resources/game_display_mode_provider.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -79,16 +80,22 @@ class GameCubit extends Cubit<GameState> {
 sealed class GameState with EquatableMixin {
   const GameState();
 
-  static const _gameHorizontalSpeed = 0.3; // pixels per millisecond
+  double calculateDistanceTravelled() {
+    final startTime = switch (this) {
+      StartedPlayingState(:final startTime) ||
+      PlayingState(:final startTime) => startTime,
+      GameOverState(:final startTime) => startTime,
+      _ => DateTime.now(),
+    };
 
-  double calculateDistanceTravelled() => switch (this) {
-    StartedPlayingState(:final startTime) || PlayingState(:final startTime) =>
-      startTime.difference(DateTime.now()).inMilliseconds.abs() *
-          _gameHorizontalSpeed,
-    GameOverState(:final startTime, :final endTime) =>
-      startTime.difference(endTime).inMilliseconds.abs() * _gameHorizontalSpeed,
-    _ => 0,
-  };
+    final endTime = switch (this) {
+      GameOverState(:final endTime) => endTime,
+      _ => DateTime.now(),
+    };
+
+    return startTime.difference(endTime).inMilliseconds.abs() *
+        GameDisplayModeProvider.instance.gameHorizontalSpeed;
+  }
 }
 
 class MainMenuGameState extends GameState {

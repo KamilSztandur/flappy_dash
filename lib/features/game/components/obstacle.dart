@@ -7,6 +7,7 @@ import 'package:flappy_dash/features/game/components/dash.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/resources/game_assets.dart';
+import 'package:flappy_dash/resources/game_display_mode_provider.dart';
 import 'package:flappy_dash/resources/game_sounds.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,10 @@ class Obstacle extends SpriteComponent
 
     sprite = await Sprite.load(obstacleAsset.filename);
 
-    size = Vector2(100, game.size.y * 0.85);
+    size = Vector2(
+      GameDisplayModeProvider.instance.isVertical ? 50 : 100,
+      game.size.y * 0.85,
+    );
 
     if (alignment == ObstacleAlignment.top) {
       flipVertically();

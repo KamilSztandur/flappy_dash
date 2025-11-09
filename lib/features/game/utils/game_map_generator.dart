@@ -4,6 +4,7 @@ import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/components/obstacle.dart';
 import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flappy_dash/features/game/providers/game_provider.dart';
+import 'package:flappy_dash/resources/game_display_mode_provider.dart';
 import 'package:flutter/material.dart';
 
 class GameMapGenerator {
@@ -15,8 +16,6 @@ class GameMapGenerator {
   final Size screenSize;
   final int totalObstacles;
 
-  static const _minHoleSize = 150.0;
-
   static const _decreasementCount = 30;
 
   GameMap create() {
@@ -24,18 +23,28 @@ class GameMapGenerator {
 
     final random = Random();
 
-    final maxHoleSize = min(300, screenSize.height * 0.8);
+    final isOnVerticalScreen = GameDisplayModeProvider.instance.isVertical;
+
+    final minHoleSize = isOnVerticalScreen ? 150.0 : 75.0;
+
+    final maxHoleSize = min(
+      300,
+      screenSize.height * (isOnVerticalScreen ? 0.8 : 0.4),
+    );
 
     final initialOffset = screenSize.width / 2 + 100;
 
     for (var i = 0; i < totalObstacles; i++) {
-      final offset = initialOffset + i * 600.0;
+      final offset = initialOffset + i * 400.0;
 
       final decreasementFactor = Curves.easeOut.transform(
         max(0, _decreasementCount - i) / _decreasementCount,
       );
 
-      final holeSize = max(_minHoleSize, maxHoleSize * decreasementFactor);
+      final holeSize = max(
+        minHoleSize,
+        maxHoleSize * decreasementFactor,
+      );
 
       final holePositionFactor = random.nextDouble();
 

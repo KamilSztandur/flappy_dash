@@ -6,6 +6,7 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/resources/game_assets.dart';
+import 'package:flappy_dash/resources/game_display_mode_provider.dart';
 import 'package:flappy_dash/resources/game_sounds.dart';
 
 class Dash extends SpriteComponent
@@ -16,7 +17,9 @@ class Dash extends SpriteComponent
   Dash()
     : super(
         key: playerKey,
-        size: Vector2.all(dashSize),
+        size: Vector2.all(
+          GameDisplayModeProvider.instance.isVertical ? 50 : 75,
+        ),
         anchor: Anchor.center,
         priority: 3,
       );

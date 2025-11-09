@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/world.dart';
+import 'package:flappy_dash/resources/game_display_mode_provider.dart';
 import 'package:flappy_dash/resources/game_music.dart';
 
 class FlappyDashGame extends FlameGame with HasCollisionDetection {
@@ -11,6 +12,13 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
   final GameCubit gameCubit;
 
   StreamSubscription<GameState>? _gameStateSubscription;
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+
+    GameDisplayModeProvider.instance.update(size);
+  }
 
   @override
   Future<void> onLoad() async {
