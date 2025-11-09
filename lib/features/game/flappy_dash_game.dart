@@ -32,20 +32,10 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
         break;
 
       case StartedPlayingState():
-        if (paused) {
-          resumeEngine();
-        }
-
         unawaited(GameMusic.game.play());
 
       case GameOverState():
         unawaited(GameMusic.menu.play());
-
-        // Let's wait for engine to play music and then clean up after game
-        // before pausing it
-        await Future<void>.delayed(const Duration(milliseconds: 50));
-
-        pauseEngine();
     }
   }
 

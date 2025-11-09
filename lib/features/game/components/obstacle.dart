@@ -74,6 +74,8 @@ class Obstacle extends SpriteComponent
 
   @override
   Future<void> update(double dt) async {
+    super.update(dt);
+
     _updateScreenPosition();
   }
 

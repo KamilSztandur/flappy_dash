@@ -68,6 +68,7 @@ class GameCubit extends Cubit<GameState> {
       emit(
         GameOverState(
           startTime: startTime,
+          endTime: DateTime.now(),
           score: userScore,
         ),
       );
@@ -81,11 +82,11 @@ sealed class GameState with EquatableMixin {
   static const _gameHorizontalSpeed = 0.3; // pixels per millisecond
 
   double calculateDistanceTravelled() => switch (this) {
-    StartedPlayingState(:final startTime) ||
-    PlayingState(:final startTime) ||
-    GameOverState(:final startTime) =>
+    StartedPlayingState(:final startTime) || PlayingState(:final startTime) =>
       startTime.difference(DateTime.now()).inMilliseconds.abs() *
           _gameHorizontalSpeed,
+    GameOverState(:final startTime, :final endTime) =>
+      startTime.difference(endTime).inMilliseconds.abs() * _gameHorizontalSpeed,
     _ => 0,
   };
 }
@@ -125,10 +126,12 @@ class PlayingState extends StartedPlayingState {
 class GameOverState extends GameState {
   const GameOverState({
     required this.startTime,
+    required this.endTime,
     required this.score,
   });
 
   final DateTime startTime;
+  final DateTime endTime;
   final GameScore score;
 
   @override

@@ -64,22 +64,19 @@ class ScoreDisplay extends TextComponent
     if (currentScore != null &&
         currentlyDisplayedScore != null &&
         currentlyDisplayedScore != currentScore) {
-      final explosion = Explosion(
-        position: Vector2(
-          size.x / 2,
-          size.y / 2,
+      add(
+        Explosion(
+          position: Vector2(
+            size.x / 2,
+            size.y / 2,
+          ),
         ),
       );
-
-      add(explosion);
 
       // Let's wait for explosion to start before updating the score
       await Future<void>.delayed(const Duration(milliseconds: 150));
 
       text = ScoreFormatter.format(currentScore);
-
-      // Let's wait for explosion to finish
-      await Future<void>.delayed(const Duration(milliseconds: 1000));
     } else {
       text = currentScore != null ? ScoreFormatter.format(currentScore) : '';
     }
