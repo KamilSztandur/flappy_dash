@@ -4,6 +4,7 @@ import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/world.dart';
 import 'package:flappy_dash/resources/game_music.dart';
+import 'package:flutter/foundation.dart';
 
 class FlappyDashGame extends FlameGame with HasCollisionDetection {
   FlappyDashGame({required this.gameCubit});
@@ -31,12 +32,12 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
       case PlayingState():
         break;
 
-      case StartedPlayingState():
-        unawaited(GameMusic.game.play());
-
+      case StartedPlayingState(:final isRestart):
         if (paused) {
           resumeEngine();
         }
+
+        unawaited(GameMusic.game.play());
 
       case GameOverState():
         unawaited(GameMusic.menu.play());

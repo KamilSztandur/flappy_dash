@@ -46,29 +46,31 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     };
 
-    return Scaffold(
-      floatingActionButton: hideUI ? null : const HomeControls(),
-      body: Stack(
-        children: [
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            child: GameWidget(game: _game),
-          ),
-
-          switch (gameCubit.state) {
-            GameOverState() => const GameOverOverlay(),
-            MainMenuGameState() => const MainMenuOverlay(),
-            StartedPlayingState() || PlayingState() => PositionedDirectional(
-              top: isVertical ? null : AppSpacings.s32.value,
-              bottom: isVertical ? AppSpacings.s32.value : null,
-              start: isVertical ? AppSpacings.s32.value : null,
-              end: AppSpacings.s32.value,
-              child: const IgnorePointer(
-                child: FlutterTipBanner(),
-              ),
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Scaffold(
+        floatingActionButton: hideUI ? null : const HomeControls(),
+        body: Stack(
+          children: [
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              child: GameWidget(game: _game),
             ),
-          },
-        ],
+            switch (gameCubit.state) {
+              GameOverState() => const GameOverOverlay(),
+              MainMenuGameState() => const MainMenuOverlay(),
+              StartedPlayingState() || PlayingState() => PositionedDirectional(
+                top: isVertical ? null : AppSpacings.s32.value,
+                bottom: isVertical ? AppSpacings.s32.value : null,
+                start: isVertical ? AppSpacings.s32.value : null,
+                end: AppSpacings.s32.value,
+                child: const IgnorePointer(
+                  child: FlutterTipBanner(),
+                ),
+              ),
+            },
+          ],
+        ),
       ),
     );
   }

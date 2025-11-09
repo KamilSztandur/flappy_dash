@@ -26,6 +26,7 @@ class GameCubit extends Cubit<GameState> {
       StartedPlayingState(
         startTime: DateTime.now(),
         map: GameMapGenerator(screenHeight: screenHeight).create(),
+        isRestart: state is GameOverState,
       ),
     );
   }
@@ -100,11 +101,13 @@ class StartedPlayingState extends GameState {
     required this.startTime,
     required this.map,
     this.score = 0,
+    required this.isRestart,
   });
 
   final DateTime startTime;
   final GameMap map;
   final int score;
+  final bool isRestart;
 
   @override
   List<Object?> get props => [startTime, map, score];
@@ -115,7 +118,7 @@ class PlayingState extends StartedPlayingState {
     required super.startTime,
     required super.map,
     super.score = 0,
-  });
+  }) : super(isRestart: false);
 }
 
 class GameOverState extends GameState {
