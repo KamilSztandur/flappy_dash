@@ -39,8 +39,6 @@ class GameWorld extends World
   void update(double dt) {
     super.update(dt);
 
-    print('xcf ${gameProvider.children.length}');
-
     gameCubit.updateScore();
   }
 
@@ -51,7 +49,6 @@ class GameWorld extends World
         break;
 
       case StartedPlayingState(:final isRestart):
-        print('isRestart: $isRestart');
         if (isRestart) {
           _tearDownGameElements();
           _setupGameElements(state);
