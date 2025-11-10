@@ -57,7 +57,7 @@ class BuildingsForeground extends PositionComponent
       );
 
       _lastBuildingAsset = buildingAsset;
-      _nextDt = Random().nextDouble() * 2.5 + 0.75;
+      _nextDt = Random().nextDouble() * 4.5 + 1.5;
       _totalDt = 0.0;
     }
   }
@@ -111,9 +111,7 @@ class _Building extends SpriteComponent
 
     sprite = buildingSprite;
 
-    width = min(400, screenSize.y / 2);
-    height =
-        width * buildingSprite.originalSize.y / buildingSprite.originalSize.x;
+    height = screenSize.y;
 
     position = Vector2(
       screenSize.x / 2 + size.x,
@@ -129,8 +127,8 @@ class _Building extends SpriteComponent
     );
 
     decorator
-      ..addLast(PaintDecorator.blur(0.5))
-      ..addLast(PaintDecorator.tint(Colors.black.withValues(alpha: 0.3)));
+      ..addLast(PaintDecorator.blur(3.5))
+      ..addLast(PaintDecorator.tint(Colors.black.withValues(alpha: 0.4)));
   }
 
   void stop() {

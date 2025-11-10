@@ -32,7 +32,7 @@ class CityBackground extends ParallaxComponent<FlappyDashGame>
     );
 
     decorator
-      ..addLast(PaintDecorator.blur(6.5))
+      ..addLast(PaintDecorator.blur(3.5))
       ..addLast(
         PaintDecorator.tint(const Color(0xFF000000).withValues(alpha: 0.15)),
       );
