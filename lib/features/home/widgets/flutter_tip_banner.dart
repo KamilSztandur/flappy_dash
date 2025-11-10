@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flappy_dash/design_system/spacings.dart';
-import 'package:flappy_dash/resources/strings.dart';
+import 'package:flappy_dash/resources/audio/game_audio_player.dart';
+import 'package:flappy_dash/resources/audio/game_sounds.dart';
+import 'package:flappy_dash/resources/translations/strings.dart';
 import 'package:flutter/material.dart';
 
 class FlutterTipBanner extends StatefulWidget {
@@ -67,7 +68,7 @@ class _FlutterTipBannerState extends State<FlutterTipBanner>
         _currentIndex++;
       });
 
-      FlameAudio.play('flutter_tip.mp3');
+      GameAudioPlayer.instance.playSound(GameSounds.tip);
 
       _bounceController.forward(from: 0);
     });

@@ -2,7 +2,7 @@ import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
 import 'package:flappy_dash/features/leaderboard/widgets/leaderboard_empty_view.dart';
 import 'package:flappy_dash/features/leaderboard/widgets/leaderboard_view.dart';
-import 'package:flappy_dash/resources/strings.dart';
+import 'package:flappy_dash/resources/translations/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

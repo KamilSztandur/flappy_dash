@@ -1,4 +1,4 @@
-import 'package:flappy_dash/common/language/language.dart';
+import 'package:flappy_dash/resources/translations/language.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSharedPreferences {

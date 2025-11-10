@@ -1,5 +1,5 @@
 import 'package:flappy_dash/design_system/spacings.dart';
-import 'package:flappy_dash/resources/strings.dart';
+import 'package:flappy_dash/resources/translations/strings.dart';
 import 'package:flutter/material.dart';
 
 class LeaderboardEmptyView extends StatelessWidget {

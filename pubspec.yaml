@@ -13,7 +13,6 @@ dependencies:
   device_frame_plus: ^1.5.0
   equatable: ^2.0.7
   flame: ^1.33.0
-  flame_audio: ^2.11.11
   flame_bloc: ^1.12.18
   flame_splash_screen: ^0.3.1+2
   flutter:
@@ -22,6 +21,7 @@ dependencies:
   flutter_comms: ^1.2.0
   flutter_localizations:
     sdk: flutter
+  flutter_soloud: ^3.4.2
   flutter_svg: ^2.2.2
   hive_ce: ^2.15.1
   icons_launcher: ^3.0.3
@@ -55,4 +55,8 @@ icons_launcher:
   image_path: "assets/logo.png"
   platforms:
     web:
+      enable: true
+    linux:
+      enable: true
+    macos:
       enable: true

@@ -4,7 +4,7 @@ import 'package:flame/rendering.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
-import 'package:flappy_dash/resources/game_assets.dart';
+import 'package:flappy_dash/resources/display/game_sprites.dart';
 import 'package:flutter/material.dart';
 
 class CityBackground extends ParallaxComponent<FlappyDashGame>
@@ -20,7 +20,7 @@ class CityBackground extends ParallaxComponent<FlappyDashGame>
 
     final sky = ParallaxLayer(
       ParallaxImage(
-        await game.images.load(GameAssets.city.filename),
+        await game.images.load(GameSprites.city.filename),
         repeat: ImageRepeat.repeatX,
       ),
       velocityMultiplier: Vector2(_velocityMultiplier, 0),

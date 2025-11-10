@@ -4,7 +4,7 @@ import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/components/obstacle.dart';
 import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flappy_dash/features/game/providers/game_provider.dart';
-import 'package:flappy_dash/resources/game_display_mode_provider.dart';
+import 'package:flappy_dash/resources/display/game_display_mode_provider.dart';
 import 'package:flutter/material.dart';
 
 class GameMapGenerator {

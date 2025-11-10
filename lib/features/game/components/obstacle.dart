@@ -6,9 +6,10 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/components/dash.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
-import 'package:flappy_dash/resources/game_assets.dart';
-import 'package:flappy_dash/resources/game_display_mode_provider.dart';
-import 'package:flappy_dash/resources/game_sounds.dart';
+import 'package:flappy_dash/resources/audio/game_audio_player.dart';
+import 'package:flappy_dash/resources/audio/game_sounds.dart';
+import 'package:flappy_dash/resources/display/game_display_mode_provider.dart';
+import 'package:flappy_dash/resources/display/game_sprites.dart';
 import 'package:flutter/material.dart';
 
 enum ObstacleAlignment { top, bottom }
@@ -36,9 +37,9 @@ class Obstacle extends SpriteComponent
     await super.onLoad();
 
     final obstacleAsset = [
-      GameAssets.obstacle1,
-      GameAssets.obstacle2,
-      GameAssets.obstacle3,
+      GameSprites.obstacle1,
+      GameSprites.obstacle2,
+      GameSprites.obstacle3,
     ].random();
 
     sprite = await game.loadSprite(obstacleAsset.filename);
@@ -68,7 +69,7 @@ class Obstacle extends SpriteComponent
         ),
       );
 
-      GameSounds.crash.play();
+      GameAudioPlayer.instance.playSound(GameSounds.crash);
 
       bloc.gameOver();
     }

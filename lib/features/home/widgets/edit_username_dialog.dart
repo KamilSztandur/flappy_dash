@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flappy_dash/common/shared_preferences.dart';
 import 'package:flappy_dash/design_system/spacings.dart';
-import 'package:flappy_dash/resources/strings.dart';
+import 'package:flappy_dash/resources/translations/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

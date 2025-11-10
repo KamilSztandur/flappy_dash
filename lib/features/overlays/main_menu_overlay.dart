@@ -2,7 +2,7 @@ import 'package:flappy_dash/design_system/spacings.dart';
 import 'package:flappy_dash/features/game/components/dash.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/resources/assets.gen.dart';
-import 'package:flappy_dash/resources/strings.dart';
+import 'package:flappy_dash/resources/translations/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

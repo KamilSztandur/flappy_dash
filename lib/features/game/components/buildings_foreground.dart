@@ -8,7 +8,7 @@ import 'package:flame/rendering.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
-import 'package:flappy_dash/resources/game_assets.dart';
+import 'package:flappy_dash/resources/display/game_sprites.dart';
 import 'package:flutter/material.dart';
 
 class BuildingsForeground extends PositionComponent
@@ -21,12 +21,12 @@ class BuildingsForeground extends PositionComponent
   var _totalDt = 0.0;
   var _nextDt = 0.0;
 
-  GameAssets? _lastBuildingAsset;
+  GameSprites? _lastBuildingAsset;
 
   final buildingsAssets = [
-    GameAssets.building1,
-    GameAssets.building2,
-    GameAssets.building3,
+    GameSprites.building1,
+    GameSprites.building2,
+    GameSprites.building3,
   ];
 
   @override
@@ -97,7 +97,7 @@ class _Building extends SpriteComponent
   }) : super(priority: 1);
 
   final ValueChanged<_Building> onComplete;
-  final GameAssets asset;
+  final GameSprites asset;
 
   bool _enabled = true;
 

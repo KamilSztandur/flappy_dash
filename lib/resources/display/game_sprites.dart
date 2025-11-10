@@ -1,4 +1,4 @@
-enum GameAssets {
+enum GameSprites {
   building1('building_1.png'),
   building2('building_2.png'),
   building3('building_3.png'),
@@ -10,7 +10,7 @@ enum GameAssets {
   obstacle2('obstacle_2.png'),
   obstacle3('obstacle_3.png');
 
-  const GameAssets(this.filename);
+  const GameSprites(this.filename);
 
   final String filename;
 }

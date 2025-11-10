@@ -4,7 +4,7 @@ import 'package:flappy_dash/features/game/models/game_map.dart';
 import 'package:flappy_dash/features/game/models/game_score.dart';
 import 'package:flappy_dash/features/game/utils/game_map_generator.dart';
 import 'package:flappy_dash/features/leaderboard/repositories/leaderboard_repository.dart';
-import 'package:flappy_dash/resources/game_display_mode_provider.dart';
+import 'package:flappy_dash/resources/display/game_display_mode_provider.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

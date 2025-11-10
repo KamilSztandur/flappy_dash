@@ -23,11 +23,8 @@ class $AssetsAudioGen {
   /// File path: assets/audio/flutter_tip.mp3
   String get flutterTip => 'assets/audio/flutter_tip.mp3';
 
-  /// File path: assets/audio/game_music.mp3
-  String get gameMusic => 'assets/audio/game_music.mp3';
-
-  /// File path: assets/audio/game_over_2.mp3
-  String get gameOver2 => 'assets/audio/game_over_2.mp3';
+  /// File path: assets/audio/gameplay_music.mp3
+  String get gameplayMusic => 'assets/audio/gameplay_music.mp3';
 
   /// File path: assets/audio/jump_1.mp3
   String get jump1 => 'assets/audio/jump_1.mp3';
@@ -45,8 +42,7 @@ class $AssetsAudioGen {
   List<String> get values => [
     crash,
     flutterTip,
-    gameMusic,
-    gameOver2,
+    gameplayMusic,
     jump1,
     jump2,
     jump3,
@@ -70,8 +66,20 @@ class $AssetsFlagsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/city.jpg
-  AssetGenImage get city => const AssetGenImage('assets/images/city.jpg');
+  /// File path: assets/images/building_1.png
+  AssetGenImage get building1 =>
+      const AssetGenImage('assets/images/building_1.png');
+
+  /// File path: assets/images/building_2.png
+  AssetGenImage get building2 =>
+      const AssetGenImage('assets/images/building_2.png');
+
+  /// File path: assets/images/building_3.png
+  AssetGenImage get building3 =>
+      const AssetGenImage('assets/images/building_3.png');
+
+  /// File path: assets/images/city.png
+  AssetGenImage get city => const AssetGenImage('assets/images/city.png');
 
   /// File path: assets/images/dash.png
   AssetGenImage get dash => const AssetGenImage('assets/images/dash.png');
@@ -96,11 +104,11 @@ class $AssetsImagesGen {
   AssetGenImage get obstacle3 =>
       const AssetGenImage('assets/images/obstacle_3.png');
 
-  /// File path: assets/images/road.jpg
-  AssetGenImage get road => const AssetGenImage('assets/images/road.jpg');
-
   /// List of all assets
   List<AssetGenImage> get values => [
+    building1,
+    building2,
+    building3,
     city,
     dash,
     dashJumping,
@@ -108,7 +116,6 @@ class $AssetsImagesGen {
     obstacle1,
     obstacle2,
     obstacle3,
-    road,
   ];
 }
 

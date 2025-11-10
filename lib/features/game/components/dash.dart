@@ -5,9 +5,10 @@ import 'package:flame/components.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
-import 'package:flappy_dash/resources/game_assets.dart';
-import 'package:flappy_dash/resources/game_display_mode_provider.dart';
-import 'package:flappy_dash/resources/game_sounds.dart';
+import 'package:flappy_dash/resources/audio/game_audio_player.dart';
+import 'package:flappy_dash/resources/audio/game_sounds.dart';
+import 'package:flappy_dash/resources/display/game_display_mode_provider.dart';
+import 'package:flappy_dash/resources/display/game_sprites.dart';
 import 'package:flutter/services.dart';
 
 class Dash extends SpriteComponent
@@ -90,8 +91,8 @@ class Dash extends SpriteComponent
 
   Future<void> _resolveSprite() async {
     final dashSprite = velocity.y < 0
-        ? GameAssets.dash
-        : GameAssets.dashJumping;
+        ? GameSprites.dash
+        : GameSprites.dashJumping;
 
     sprite = await game.loadSprite(dashSprite.filename);
   }
@@ -110,7 +111,11 @@ class Dash extends SpriteComponent
   }
 
   void jump() {
-    unawaited(GameSounds.playRandomJump());
+    unawaited(
+      GameAudioPlayer.instance.playSound(
+        GameSounds.randomJump,
+      ),
+    );
 
     lastJumpTime = DateTime.now();
     velocity.y = velocity.y.clamp(1.5 * jumpVelocity, 0);

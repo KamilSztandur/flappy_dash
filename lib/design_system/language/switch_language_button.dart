@@ -1,6 +1,6 @@
-import 'package:flappy_dash/common/language/language.dart';
 import 'package:flappy_dash/common/language/language_cubit.dart';
 import 'package:flappy_dash/design_system/spacings.dart';
+import 'package:flappy_dash/resources/translations/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flappy_dash/features/phone_emulator/cubits/phone_emulator_cubit.dart';
-import 'package:flappy_dash/resources/strings.dart';
+import 'package:flappy_dash/resources/translations/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

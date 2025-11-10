@@ -1,7 +1,7 @@
 import 'package:flame_splash_screen/flame_splash_screen.dart';
 import 'package:flappy_dash/common/language/language_cubit.dart';
 import 'package:flappy_dash/features/home/home_screen.dart';
-import 'package:flappy_dash/l10n/app_localizations.dart';
+import 'package:flappy_dash/resources/translations/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';

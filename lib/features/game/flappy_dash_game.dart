@@ -4,9 +4,10 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/world.dart';
-import 'package:flappy_dash/resources/game_assets.dart';
-import 'package:flappy_dash/resources/game_display_mode_provider.dart';
-import 'package:flappy_dash/resources/game_music.dart';
+import 'package:flappy_dash/resources/audio/game_audio_player.dart';
+import 'package:flappy_dash/resources/audio/game_music.dart';
+import 'package:flappy_dash/resources/display/game_display_mode_provider.dart';
+import 'package:flappy_dash/resources/display/game_sprites.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -35,28 +36,28 @@ class FlappyDashGame extends FlameGame
 
     await _preloadAssets();
 
-    unawaited(GameMusic.menu.play());
-
     gameCubit.stream.listen(_onGameStateChanged);
 
     world = GameWorld(gameCubit: gameCubit);
 
+    unawaited(GameAudioPlayer.instance.playMusic(GameMusic.menu));
+
     onEngineLoaded();
   }
 
-  Future<void> _onGameStateChanged(GameState state) async {
+  void _onGameStateChanged(GameState state) {
     switch (state) {
       case MainMenuGameState():
-        unawaited(GameMusic.menu.play());
+        GameAudioPlayer.instance.playMusic(GameMusic.menu);
 
       case PlayingState():
         break;
 
       case StartedPlayingState():
-        unawaited(GameMusic.game.play());
+        GameAudioPlayer.instance.playMusic(GameMusic.game);
 
       case GameOverState():
-        unawaited(GameMusic.menu.play());
+        GameAudioPlayer.instance.playMusic(GameMusic.menu);
     }
   }
 
@@ -87,7 +88,7 @@ class FlappyDashGame extends FlameGame
 
   Future<void> _preloadAssets() async {
     await [
-      for (final asset in GameAssets.values) images.load(asset.filename),
+      for (final asset in GameSprites.values) images.load(asset.filename),
     ].wait;
   }
 }
