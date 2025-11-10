@@ -1,14 +1,17 @@
 import 'dart:async';
 
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/world.dart';
 import 'package:flappy_dash/resources/game_assets.dart';
 import 'package:flappy_dash/resources/game_display_mode_provider.dart';
 import 'package:flappy_dash/resources/game_music.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-class FlappyDashGame extends FlameGame with HasCollisionDetection {
+class FlappyDashGame extends FlameGame
+    with HasCollisionDetection, HasKeyboardHandlerComponents {
   FlappyDashGame({
     required this.gameCubit,
     required this.onEngineLoaded,
@@ -55,6 +58,24 @@ class FlappyDashGame extends FlameGame with HasCollisionDetection {
       case GameOverState():
         unawaited(GameMusic.menu.play());
     }
+  }
+
+  @override
+  KeyEventResult onKeyEvent(
+    KeyEvent event,
+    Set<LogicalKeyboardKey> keysPressed,
+  ) {
+    if (gameCubit.state case GameOverState() || MainMenuGameState()) {
+      if (event case KeyDownEvent(
+        logicalKey: LogicalKeyboardKey.space || LogicalKeyboardKey.enter,
+      )) {
+        gameCubit.startGame(screenSize: size.toSize());
+      }
+
+      return KeyEventResult.handled;
+    }
+
+    return super.onKeyEvent(event, keysPressed);
   }
 
   @override

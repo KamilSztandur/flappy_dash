@@ -8,12 +8,14 @@ import 'package:flappy_dash/features/game/flappy_dash_game.dart';
 import 'package:flappy_dash/resources/game_assets.dart';
 import 'package:flappy_dash/resources/game_display_mode_provider.dart';
 import 'package:flappy_dash/resources/game_sounds.dart';
+import 'package:flutter/services.dart';
 
 class Dash extends SpriteComponent
     with
         HasGameReference<FlappyDashGame>,
         CollisionCallbacks,
-        FlameBlocReader<GameCubit, GameState> {
+        FlameBlocReader<GameCubit, GameState>,
+        KeyboardHandler {
   Dash()
     : super(
         key: playerKey,
@@ -92,6 +94,19 @@ class Dash extends SpriteComponent
         : GameAssets.dashJumping;
 
     sprite = await game.loadSprite(dashSprite.filename);
+  }
+
+  @override
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    if (event case KeyDownEvent(
+      logicalKey: LogicalKeyboardKey.space || LogicalKeyboardKey.enter,
+    )) {
+      jump();
+
+      return true;
+    }
+
+    return false;
   }
 
   void jump() {
