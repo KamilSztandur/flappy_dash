@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flappy_dash/features/game/components/background.dart';
+import 'package:flappy_dash/features/game/components/buildings_foreground.dart';
+import 'package:flappy_dash/features/game/components/city_background.dart';
 import 'package:flappy_dash/features/game/components/dash.dart';
-import 'package:flappy_dash/features/game/components/road.dart';
 import 'package:flappy_dash/features/game/components/score_display.dart';
 import 'package:flappy_dash/features/game/cubits/game_cubit.dart';
 import 'package:flappy_dash/features/game/flappy_dash_game.dart';
@@ -19,7 +19,7 @@ class GameWorld extends World
         gameCubit: gameCubit,
         children: [
           CityBackground(),
-          Road(),
+          BuildingsForeground(),
         ],
       );
 
@@ -62,7 +62,9 @@ class GameWorld extends World
       case StartedPlayingState(:final isRestart):
         if (isRestart) {
           gameProvider.removeWhere(
-            (component) => component is! CityBackground && component is! Road,
+            (component) =>
+                component is! CityBackground &&
+                component is! BuildingsForeground,
           );
         }
 

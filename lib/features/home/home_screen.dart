@@ -72,7 +72,9 @@ class _HomeScreenState extends State<_HomeScreen> {
           children: [
             GestureDetector(
               behavior: HitTestBehavior.opaque,
-              child: GameWidget(game: _game),
+              child: GameWidget(
+                game: _game,
+              ),
             ),
             if (_engineLoaded)
               switch (gameCubit.state) {
