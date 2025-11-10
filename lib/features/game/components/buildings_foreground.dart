@@ -57,7 +57,7 @@ class BuildingsForeground extends PositionComponent
       );
 
       _lastBuildingAsset = buildingAsset;
-      _nextDt = Random().nextDouble() * 4.5 + 1.5;
+      _nextDt = 4 + Random().nextDouble() * 5;
       _totalDt = 0.0;
     }
   }
@@ -114,21 +114,21 @@ class _Building extends SpriteComponent
     height = screenSize.y;
 
     position = Vector2(
-      screenSize.x / 2 + size.x,
+      screenSize.x / 2,
       screenSize.y / 2 - size.y,
     );
 
     add(
       MoveEffect.by(
-        Vector2(-screenSize.x - 2 * size.x, 0),
-        EffectController(speed: 250),
+        Vector2(-screenSize.x - size.x, 0),
+        EffectController(speed: 150),
         onComplete: () => onComplete(this),
       ),
     );
 
     decorator
-      ..addLast(PaintDecorator.blur(3.5))
-      ..addLast(PaintDecorator.tint(Colors.black.withValues(alpha: 0.4)));
+      ..addLast(PaintDecorator.blur(2))
+      ..addLast(PaintDecorator.tint(Colors.black.withValues(alpha: 0.25)));
   }
 
   void stop() {
