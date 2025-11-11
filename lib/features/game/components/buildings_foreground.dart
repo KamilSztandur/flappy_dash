@@ -18,8 +18,7 @@ class BuildingsForeground extends PositionComponent
   BuildingsForeground() : super(priority: 1);
 
   var _enabled = true;
-  var _totalDt = 0.0;
-  var _nextDt = 0.0;
+  Timer? _spawnTimer;
 
   GameSprites? _lastBuildingAsset;
 
@@ -30,10 +29,27 @@ class BuildingsForeground extends PositionComponent
   ];
 
   @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+
+    _spawnBuildingAndSetupTimer();
+  }
+
+  void _spawnBuildingAndSetupTimer() {
+    _spawnTimer?.stop();
+    _spawnTimer = null;
+
+    _spawnBuilding();
+
+    _spawnTimer ??= Timer(
+      4 + Random().nextDouble() * 5,
+      onTick: _spawnBuildingAndSetupTimer,
+    );
+  }
+
+  @override
   void update(double dt) {
     super.update(dt);
-
-    _totalDt += dt;
 
     if (!_enabled) {
       final buildings = children.whereType<_Building>();
@@ -41,25 +57,33 @@ class BuildingsForeground extends PositionComponent
       for (final building in buildings) {
         building.stop();
       }
+
+      return;
     }
 
-    if (_enabled && _totalDt >= _nextDt) {
-      final buildingAsset = [
-        for (final asset in buildingsAssets)
-          if (asset != _lastBuildingAsset) asset,
-      ].random();
+    _spawnTimer?.update(dt);
+  }
 
-      add(
-        _Building(
-          onComplete: remove,
-          asset: buildingAsset,
-        ),
-      );
+  void _spawnBuilding() {
+    final buildingAsset = [
+      for (final asset in buildingsAssets)
+        if (asset != _lastBuildingAsset) asset,
+    ].random();
 
-      _lastBuildingAsset = buildingAsset;
-      _nextDt = 4 + Random().nextDouble() * 5;
-      _totalDt = 0.0;
-    }
+    add(
+      _Building(
+        onComplete: remove,
+        asset: buildingAsset,
+      ),
+    );
+
+    _lastBuildingAsset = buildingAsset;
+
+    // Reset timer with new random duration
+    _spawnTimer = Timer(
+      4 + Random().nextDouble() * 5,
+      onTick: _spawnBuilding,
+    );
   }
 
   @override

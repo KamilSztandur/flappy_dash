@@ -46,8 +46,8 @@ class CityBackground extends ParallaxComponent<FlappyDashGame>
   }
 
   @override
-  void update(double dt) {
-    super.update(dt);
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
 
     _positionAndSize();
   }

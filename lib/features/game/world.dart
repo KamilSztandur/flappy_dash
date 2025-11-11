@@ -26,6 +26,8 @@ class GameWorld extends World
   final GameProvider gameProvider;
   final GameCubit gameCubit;
   StreamSubscription<GameState>? _gameStateSubscription;
+  Timer? _obstaclesUpdateTimer;
+  Timer? _updateScoreTimer;
 
   @override
   Future<void> onLoad() async {
@@ -34,14 +36,29 @@ class GameWorld extends World
     add(gameProvider);
 
     _gameStateSubscription = gameCubit.stream.listen(_gameListener);
+
+    _obstaclesUpdateTimer = Timer(
+      0.5,
+      repeat: true,
+      onTick: _updateRenderedObstacles,
+    )..pause();
+
+    _updateScoreTimer = Timer(
+      0.2,
+      repeat: true,
+      onTick: gameCubit.updateScore,
+    )..pause();
   }
 
   @override
   void update(double dt) {
     super.update(dt);
 
-    gameCubit.updateScore();
+    _obstaclesUpdateTimer?.update(dt);
+    _updateScoreTimer?.update(dt);
+  }
 
+  void _updateRenderedObstacles() {
     if (gameCubit.state
         case PlayingState(:final map) || StartedPlayingState(:final map)) {
       GameMapGenerator.updateRenderedObstacles(
@@ -60,7 +77,21 @@ class GameWorld extends World
         break;
 
       case StartedPlayingState(:final isRestart):
+        _updateRenderedObstacles();
+        _obstaclesUpdateTimer?.resume();
+
+        gameCubit.updateScore();
+        _updateScoreTimer?.resume();
+
         if (isRestart) {
+          _obstaclesUpdateTimer
+            ?..reset()
+            ..resume();
+
+          _updateScoreTimer
+            ?..reset()
+            ..resume();
+
           gameProvider.removeWhere(
             (component) =>
                 component is! CityBackground &&
@@ -78,6 +109,9 @@ class GameWorld extends World
         player.jump();
 
       case GameOverState():
+        _obstaclesUpdateTimer?.pause();
+        _updateScoreTimer?.pause();
+
         final component = game.findByKey(ScoreDisplay.scoreKey);
         if (component != null) {
           gameProvider.remove(component);

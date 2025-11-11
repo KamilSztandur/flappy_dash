@@ -35,7 +35,8 @@ class Dash extends SpriteComponent
 
   final velocity = Vector2(0, jumpVelocity);
 
-  DateTime lastJumpTime = DateTime.now();
+  DateTime _lastJumpTime = DateTime.now();
+  GameSprites? _currentAsset;
 
   @override
   Future<void> onLoad() async {
@@ -61,7 +62,7 @@ class Dash extends SpriteComponent
       return;
     }
 
-    final millisecondsSinceLastJump = lastJumpTime
+    final millisecondsSinceLastJump = _lastJumpTime
         .difference(DateTime.now())
         .inMilliseconds
         .abs();
@@ -94,6 +95,12 @@ class Dash extends SpriteComponent
         ? GameSprites.dash
         : GameSprites.dashJumping;
 
+    if (_currentAsset == dashSprite) {
+      return;
+    }
+
+    _currentAsset = dashSprite;
+
     sprite = await game.loadSprite(dashSprite.filename);
   }
 
@@ -117,7 +124,7 @@ class Dash extends SpriteComponent
       ),
     );
 
-    lastJumpTime = DateTime.now();
+    _lastJumpTime = DateTime.now();
     velocity.y = velocity.y.clamp(1.5 * jumpVelocity, 0);
 
     velocity.y += jumpVelocity;
