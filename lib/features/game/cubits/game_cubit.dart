@@ -35,8 +35,8 @@ class GameCubit extends Cubit<GameState> {
 
   void updateScore() {
     if (state
-        case PlayingState(:final map, :final startTime) ||
-            StartedPlayingState(:final map, :final startTime)) {
+        case PlayingState(:final map, :final startTime, :final score) ||
+            StartedPlayingState(:final map, :final startTime, :final score)) {
       var reachedMilestones = 0;
 
       final distanceTraveled = state.calculateDistanceTravelled();
@@ -45,6 +45,10 @@ class GameCubit extends Cubit<GameState> {
         if (distanceTraveled >= milestone) {
           reachedMilestones++;
         }
+      }
+
+      if (score == reachedMilestones) {
+        return;
       }
 
       emit(

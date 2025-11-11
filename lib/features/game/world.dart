@@ -27,7 +27,6 @@ class GameWorld extends World
   final GameCubit gameCubit;
   StreamSubscription<GameState>? _gameStateSubscription;
   Timer? _obstaclesUpdateTimer;
-  Timer? _updateScoreTimer;
 
   @override
   Future<void> onLoad() async {
@@ -38,15 +37,9 @@ class GameWorld extends World
     _gameStateSubscription = gameCubit.stream.listen(_gameListener);
 
     _obstaclesUpdateTimer = Timer(
-      0.5,
+      0.3,
       repeat: true,
       onTick: _updateRenderedObstacles,
-    )..pause();
-
-    _updateScoreTimer = Timer(
-      0.2,
-      repeat: true,
-      onTick: gameCubit.updateScore,
     )..pause();
   }
 
@@ -55,7 +48,8 @@ class GameWorld extends World
     super.update(dt);
 
     _obstaclesUpdateTimer?.update(dt);
-    _updateScoreTimer?.update(dt);
+
+    gameCubit.updateScore();
   }
 
   void _updateRenderedObstacles() {
@@ -80,15 +74,8 @@ class GameWorld extends World
         _updateRenderedObstacles();
         _obstaclesUpdateTimer?.resume();
 
-        gameCubit.updateScore();
-        _updateScoreTimer?.resume();
-
         if (isRestart) {
           _obstaclesUpdateTimer
-            ?..reset()
-            ..resume();
-
-          _updateScoreTimer
             ?..reset()
             ..resume();
 
@@ -102,15 +89,12 @@ class GameWorld extends World
         final player = Dash();
 
         gameProvider.addAll([
-          Dash(),
+          player,
           ScoreDisplay(),
         ]);
 
-        player.jump();
-
       case GameOverState():
         _obstaclesUpdateTimer?.pause();
-        _updateScoreTimer?.pause();
 
         final component = game.findByKey(ScoreDisplay.scoreKey);
         if (component != null) {

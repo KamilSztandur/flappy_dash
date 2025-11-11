@@ -45,7 +45,7 @@ class Obstacle extends SpriteComponent
     sprite = await game.loadSprite(obstacleAsset.filename);
 
     size = Vector2(
-      GameDisplayModeProvider.instance.isVertical ? 50 : 100,
+      GameDisplayModeProvider.instance.isVertical ? 75 : 100,
       game.size.y * 0.85,
     );
 

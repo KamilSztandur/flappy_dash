@@ -83,13 +83,13 @@ class GameMapGenerator {
     for (final component in game.children) {
       if (component case Obstacle(
         :final globalOffset,
-      ) when globalOffset < distanceTravelled - screenWidth * (2 / 3)) {
+      ) when globalOffset < distanceTravelled - screenWidth) {
         game.remove(component);
       }
     }
 
     for (final obstacle in obstacles) {
-      if (obstacle.globalOffset < distanceTravelled + screenWidth * (2 / 3)) {
+      if (obstacle.globalOffset < distanceTravelled + screenWidth) {
         game.add(obstacle);
       }
     }

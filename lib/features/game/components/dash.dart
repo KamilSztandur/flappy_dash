@@ -31,20 +31,32 @@ class Dash extends SpriteComponent
 
   static final playerKey = ComponentKey.unique();
   static const gravitalVelocity = 100.0;
-  static const jumpVelocity = -300.0;
+  static const jumpVelocityMultiplier = -0.4;
 
-  final velocity = Vector2(0, jumpVelocity);
+  final velocity = Vector2(0, 0);
 
   DateTime _lastJumpTime = DateTime.now();
+  var _jumpVelocity = 0.0;
   GameSprites? _currentAsset;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
+    _resolveJumpVelocity();
+
     await _resolveSprite();
 
     add(CircleHitbox());
+
+    jump();
+  }
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+
+    _resolveJumpVelocity();
   }
 
   @override
@@ -90,6 +102,10 @@ class Dash extends SpriteComponent
     await _resolveSprite();
   }
 
+  void _resolveJumpVelocity() {
+    _jumpVelocity = jumpVelocityMultiplier * game.size.y;
+  }
+
   Future<void> _resolveSprite() async {
     final dashSprite = velocity.y < 0
         ? GameSprites.dash
@@ -125,8 +141,8 @@ class Dash extends SpriteComponent
     );
 
     _lastJumpTime = DateTime.now();
-    velocity.y = velocity.y.clamp(1.5 * jumpVelocity, 0);
+    velocity.y = velocity.y.clamp(1.5 * _jumpVelocity, 0);
 
-    velocity.y += jumpVelocity;
+    velocity.y += _jumpVelocity;
   }
 }
