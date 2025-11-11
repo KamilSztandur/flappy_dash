@@ -62,7 +62,9 @@ class GameCubit extends Cubit<GameState> {
   }
 
   Future<void> gameOver() async {
-    if (state case PlayingState(:final score, :final startTime)) {
+    if (state
+        case StartedPlayingState(:final score, :final startTime) ||
+            PlayingState(:final score, :final startTime)) {
       final userScore = GameScore(
         username: _preferences.username,
         value: score,
