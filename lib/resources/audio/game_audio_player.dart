@@ -54,6 +54,7 @@ class GameAudioPlayer {
       _currentMusicHandle = await _soloud.play(
         source,
         looping: true,
+        volume: 0.5,
       );
     } catch (_) {
       // Handle error silently or log if needed
