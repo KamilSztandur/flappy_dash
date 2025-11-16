@@ -55,7 +55,7 @@ class _HomeScreenState extends State<_HomeScreen> {
     final uiVisibilityCubit = context.watch<UIVisibilityCubit>();
 
     final hideUI = switch (gameCubit.state) {
-      PlayingState() => true,
+      PlayingState() || StartedPlayingState() => true,
       _ => switch (uiVisibilityCubit.state) {
         UIVisibleState() => false,
         UIInvisibleState() => true,
@@ -78,8 +78,6 @@ class _HomeScreenState extends State<_HomeScreen> {
             ),
             if (_engineLoaded)
               switch (gameCubit.state) {
-                GameOverState() => const GameOverOverlay(),
-                MainMenuGameState() => const MainMenuOverlay(),
                 StartedPlayingState() ||
                 PlayingState() => PositionedDirectional(
                   top: isVertical ? null : AppSpacings.s32.value,
@@ -90,6 +88,8 @@ class _HomeScreenState extends State<_HomeScreen> {
                     child: FlutterTipBanner(),
                   ),
                 ),
+                GameOverState() => const GameOverOverlay(),
+                MainMenuGameState() => const MainMenuOverlay(),
               },
           ],
         ),
