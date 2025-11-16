@@ -13,73 +13,73 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get game_flutter_tips_1 =>
-      'Ignoruj wszystkie błędy – one tylko spowalniają kompilację.';
+      'Nie używaj null-safety, kiedyś wszystko działało bez tego';
 
   @override
   String get game_flutter_tips_2 =>
-      'Nie testuj niczego. Jak działa na twoim emulatorze, to znaczy, że działa wszędzie.';
+      'Nie dziel kodu na pliki – jeden duży plik to prawdziwa siła seniora';
 
   @override
   String get game_flutter_tips_3 =>
-      'Używaj setState() absolutnie wszędzie, nawet w async callach.';
+      'Nie używaj const, bo wtedy kod wygląda zbyt poważnie';
 
   @override
   String get game_flutter_tips_4 =>
-      'Trzymaj wszystkie kolory, czcionki i marginesy bezpośrednio w widgetach.';
+      'Zawsze ustawiaj “shrinkWrap: true”, bo to super wygodne';
 
   @override
   String get game_flutter_tips_5 =>
-      'Nie dziel kodu na pliki – jeden duży plik to prawdziwa siła seniora.';
+      'Dodawaj komentarz do każdego wiersza kodu, żeby wyglądało, że się naprawdę narobiłeś';
 
   @override
   String get game_flutter_tips_6 =>
-      'Komentuj każdy wiersz kodu, żeby wyglądało że się napracowałeś.';
+      'Jeśli czegoś nie ma w Materialu, to znaczy, że nie da się tego we Flutterze zrobić';
 
   @override
   String get game_flutter_tips_7 =>
-      'Nie używaj const, bo to wygląda zbyt formalnie.';
+      'Pisz wszystko w jednym drzewie widgetów, to nie będziesz musiał przekazywać rzeczy przez konstruktory';
 
   @override
   String get game_flutter_tips_8 =>
-      'Nigdy nie aktualizuj paczek – przecież działało w 2021.';
+      'Linter to strata czasu. Przecież się kompiluje, więc co za różnica?';
 
   @override
   String get game_flutter_tips_9 =>
-      'Nie używaj null safety, bo i tak wszystko działało bez tego.';
+      'Formatowanie kodu jest zbędne i zabija indywidualny styl programisty';
 
   @override
   String get game_flutter_tips_10 =>
-      'Zawsze zaczynaj projekt od kopiowania starego folderu z innej apki.';
+      'Jeżeli wszystkie Twoje Providery będą globalne, to nigdy nie natrafisz na wyjątek „ProviderNotFound”';
 
   @override
   String get game_flutter_tips_11 =>
-      'Używaj var wszędzie – typy są dla słabych.\n';
+      'Nie działa Ci test? Daj flagę “skip” na true, a przestanie się sypać';
 
   @override
   String get game_flutter_tips_12 =>
-      'Nie czytaj code review – to tylko marnowanie czasu.';
+      'Slivery są proste. “SliverToBoxAdapter” z “SingleChildScrollView” z “Column” i masz super layout';
 
   @override
   String get game_flutter_tips_13 =>
-      'Używaj SingleChildScrollView z Column z tysiącem dzieci, jest wygodniej';
+      'Po co w ogóle ten Flutter, Kotlin wygodniejszy';
 
   @override
   String get game_flutter_tips_14 =>
-      'Zawsze wrzucaj dane lokalne bezpośrednio do widgetu, zapomnij o providerze.';
+      'Warningi to tylko sugestie, nie musisz ich przestrzegać';
 
   @override
-  String get game_flutter_tips_15 => 'Nie rób refaktoryzacji – to zabija flow!';
+  String get game_flutter_tips_15 => 'Zawsze rób print() zamiast debuggera';
 
   @override
   String get game_flutter_tips_16 =>
-      'Nie daj się zastraszyć, wyłącz debug console';
+      'Używaj var wszędzie – typy są dla słabych';
 
   @override
-  String get game_flutter_tips_17 => 'Zawsze rób print() zamiast debuggera.';
+  String get game_flutter_tips_17 => 'Nie rób refaktoryzacji – to zabija flow!';
 
   @override
   String get game_flutter_tips_18 =>
-      'Trzymaj logikę i UI w jednym miejscu, bo po co się rozdrabniać.';
+      'Nigdy nie aktualizuj paczek – przecież działało w 2021';
 
   @override
   String get game_flutter_tips_19 =>

@@ -13,82 +13,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get game_flutter_tips_1 =>
-      'Ignore all errors – they only slow down your build.';
+      'Don’t use null-safety, everything used to work fine without it anyway.';
 
   @override
   String get game_flutter_tips_2 =>
-      'Don’t test anything. If it works in your emulator, it works everywhere.';
+      'Don’t split code into files – one giant file is the true power of a senior developer.';
 
   @override
   String get game_flutter_tips_3 =>
-      'Używaj setState() absolutnie wszędzie, nawet w async callach.';
+      'Don’t use const, it makes the code look way too serious.';
 
   @override
   String get game_flutter_tips_4 =>
-      'Keep all colors, fonts, and paddings directly in your widgets.';
+      'Always set “shrinkWrap: true” because it’s super convenient.';
 
   @override
   String get game_flutter_tips_5 =>
-      'Don’t split your code – one huge file shows true seniority.';
+      'Add a comment to every single line so it looks like you worked really hard.';
 
   @override
   String get game_flutter_tips_6 =>
-      'Comment every single line, it makes you look like a hardworking person.';
+      'If something isn’t in Material, it simply can’t be done in Flutter.';
 
   @override
   String get game_flutter_tips_7 =>
-      'Avoid using const, it looks too serious D:';
+      'Write everything in one massive widget tree so you never have to pass anything through constructors.';
 
   @override
   String get game_flutter_tips_8 =>
-      'Never update packages – it worked fine back in 2021.';
+      'Linter is a waste of time. It compiles, so what’s the problem?';
 
   @override
   String get game_flutter_tips_9 =>
-      'Skip null safety, back then everything worked fine without it';
+      'Code formatting is unnecessary and kills a developer’s unique artistic style.';
 
   @override
   String get game_flutter_tips_10 =>
-      'Always start a new project by copying an old one.';
+      'If all your Providers are global, you’ll never hit a “ProviderNotFound” exception.';
 
   @override
   String get game_flutter_tips_11 =>
-      'Use var everywhere – types are for the weak.';
+      'Test failing? Set “skip” to true and it magically stops failing.';
 
   @override
   String get game_flutter_tips_12 =>
-      'Never address code reviews – they’re just a waste of time.';
+      'Slivers are easy. Just mix “SliverToBoxAdapter” with “SingleChildScrollView” and “Column” for an amazing layout.';
 
   @override
   String get game_flutter_tips_13 =>
-      'Use a SingleChildScrollView with Column with a thousand children – sooo convenient!\n';
+      'Why even bother with Flutter? Kotlin is more comfortable anyway.';
 
   @override
   String get game_flutter_tips_14 =>
-      'Always hardcode your data directly in the widget, forget about providers.';
+      'Warnings are just friendly suggestions; you don’t need to listen to them.';
 
   @override
-  String get game_flutter_tips_15 => 'Never refactor – it kills the mood!';
-
-  @override
-  String get game_flutter_tips_16 =>
-      'Don\'t let debug console intimidate you, hide it';
-
-  @override
-  String get game_flutter_tips_17 =>
+  String get game_flutter_tips_15 =>
       'Always use print() instead of the debugger.';
 
   @override
+  String get game_flutter_tips_16 =>
+      'Używaj var wszędzie – typy są dla słabych';
+
+  @override
+  String get game_flutter_tips_17 => 'Never refactor – it kills your flow!';
+
+  @override
   String get game_flutter_tips_18 =>
-      'Keep logic and UI in one place, no need to overcomplicate.';
+      'Never update packages – everything worked perfectly in 2021.';
 
   @override
   String get game_flutter_tips_19 =>
-      'Always use StatefulWidget, maybe some day you\'ll need its state';
+      'Always use StatefulWidget; maybe someday you’ll actually use its state.';
 
   @override
   String get game_flutter_tips_20 =>
-      'I have nothing left to teach you — you’re the perfect senior';
+      'There’s nothing more I can teach you — you’re already a perfect senior.';
 
   @override
   String get game_flutter_tips_progress_more => 'Progress more to see more!';
